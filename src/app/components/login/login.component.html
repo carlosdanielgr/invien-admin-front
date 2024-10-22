@@ -1,5 +1,5 @@
 <article class="login">
-  <form class="login__form">
+  <form class="login__form" [formGroup]="form">
     <figure class="login__logo">
       <img src="./assets/images/logo.png" alt="logo" />
     </figure>
@@ -9,6 +9,7 @@
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
+        formControlName="email"
       />
       <label for="floatingInput">Correo electrónico</label>
     </div>
@@ -18,10 +19,16 @@
         class="form-control"
         id="floatingPassword"
         placeholder="Password"
+        formControlName="password"
       />
       <label for="floatingPassword">Contraseña</label>
     </div>
-    <button type="button" class="btn btn-primary" [disabled]="true">
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      (click)="sendLogin()"
+    >
       Iniciar sesión
     </button>
   </form>
