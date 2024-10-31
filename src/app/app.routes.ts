@@ -12,6 +12,15 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [authGuard()],
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            './components/admin/components/projects/projects.component'
+          ).then((c) => c.ProjectsComponent),
+      },
+    ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

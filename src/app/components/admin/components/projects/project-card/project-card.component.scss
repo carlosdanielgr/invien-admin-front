@@ -1,0 +1,22 @@
+.project-card {
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
+  background-color: var(--gray-primary);
+  padding: 1rem;
+  &__title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  > p {
+    font-size: 0.8rem;
+  }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    > button {
+      padding: 0.2rem 1rem;
+    }
+  }
+}

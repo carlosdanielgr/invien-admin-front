@@ -15,7 +15,8 @@
     width: 100%;
     max-width: 550px;
     border-radius: 1rem;
-    background-color: var(--bs-gray-200);
+    background-color: var(--gray-primary);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.28);
   }
   &__logo {
     @include absoluteCenter(50%, -35%);

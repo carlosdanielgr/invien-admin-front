@@ -5,7 +5,9 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem;
-  background-color: var(--bs-gray-200);
+  background-color: var(--gray-primary);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.28);
+  z-index: 1000;
   &__logo {
     max-width: 4.2rem;
   }
