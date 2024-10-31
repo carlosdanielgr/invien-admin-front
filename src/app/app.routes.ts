@@ -20,6 +20,13 @@ export const routes: Routes = [
             './components/admin/components/projects/projects.component'
           ).then((c) => c.ProjectsComponent),
       },
+      {
+        path: 'project-add',
+        loadComponent: () =>
+          import(
+            './components/admin/components/manage-project/manage-project.component'
+          ).then((c) => c.ManageProjectComponent),
+      },
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

@@ -4,19 +4,22 @@
   </figure>
   <div class="header__links">
     <a
+      class="header__links__link"
       routerLink="./"
       routerLinkActive="header__links__link--active"
-      class="header__links__link"
+      [routerLinkActiveOptions]="{ exact: true }"
     >
       Proyectos
     </a>
     <a
+      class="header__links__link"
       routerLink="project-add"
       routerLinkActive="header__links__link--active"
-      class="header__links__link"
     >
       Agregar proyecto
     </a>
   </div>
-  <button type="button" class="btn btn-primary">Cerrar sesión</button>
+  <button type="button" class="btn btn-primary">
+    <img src="./assets/icons/logout.svg" alt="logout" />
+  </button>
 </header>
