@@ -3,6 +3,7 @@
   top: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   padding: 1rem;
   background-color: var(--gray-primary);
@@ -10,5 +11,17 @@
   z-index: 1000;
   &__logo {
     max-width: 4.2rem;
+  }
+  &__links {
+    display: flex;
+    gap: 1.5rem;
+    &__link {
+      color: #000;
+      text-decoration: none;
+      &:hover,
+      &--active {
+        color: var(--bs-primary);
+      }
+    }
   }
 }
