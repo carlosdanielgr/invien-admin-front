@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Login, LoginService } from './login.service';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -16,14 +18,24 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    user: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly loginService: LoginService
+  ) {}
 
   sendLogin() {
-    localStorage.setItem('token', 'abcd1234');
-    this.router.navigate(['admin']);
+    this.loginService.postLogin(this.form.value as Login).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['admin']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

@@ -1,17 +1,17 @@
 <article class="login">
-  <form class="login__form" [formGroup]="form">
+  <form class="login__form" [formGroup]="form" (ngSubmit)="sendLogin()">
     <figure class="login__logo">
       <img src="./assets/images/logo.png" alt="logo" />
     </figure>
     <div class="form-floating">
       <input
-        type="email"
+        type="text"
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
-        formControlName="email"
+        formControlName="user"
       />
-      <label for="floatingInput">Correo electrónico</label>
+      <label for="floatingInput">Nombre de usuario</label>
     </div>
     <div class="form-floating">
       <input
@@ -23,12 +23,7 @@
       />
       <label for="floatingPassword">Contraseña</label>
     </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      [disabled]="form.invalid"
-      (click)="sendLogin()"
-    >
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
       Iniciar sesión
     </button>
   </form>
