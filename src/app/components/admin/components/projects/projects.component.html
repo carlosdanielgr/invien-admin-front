@@ -3,3 +3,11 @@
   <app-project-card [project]="project" />
   }
 </article>
+@if(!projects.length){
+<div class="projects__no-data">
+  <p>Aún no se ha creado ningún proyecto</p>
+  <button type="button" class="btn btn-success" routerLink="project-add">
+    Agregar proyecto
+  </button>
+</div>
+}
