@@ -1,14 +1,215 @@
 <article class="manage-project">
   <h1>Agregar proyecto</h1>
-  <form class="manage-project__form">
-    <div class="form-floating">
-      <input
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Nombre</label>
+  <form
+    class="manage-project__form"
+    [formGroup]="form"
+    (ngSubmit)="onSaveProject()"
+  >
+    <div class="manage-project__form-lenguage">
+      <span>Texto en español</span>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="name_es"
+        />
+        <label for="floatingInput">Nombre en español</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="location_en"
+        />
+        <label for="floatingInput">Ubicación en español</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+          formControlName="details_es"
+        ></textarea>
+        <label for="floatingTextarea2">Detalles en español</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+          formControlName="description_es"
+        ></textarea>
+        <label for="floatingTextarea2">Descripción en español</label>
+      </div>
+      <div>
+        <div class="input-group mb-3">
+          <input
+            #amenityEs
+            type="text"
+            class="form-control"
+            placeholder="Amenidad en español"
+          />
+          <button
+            class="btn btn-success"
+            type="button"
+            (click)="addAmenity('es', amenityEs)"
+          >
+            <img src="./assets/icons/add.svg" alt="add" />
+          </button>
+        </div>
+        <ul class="list-group">
+          @for (item of amenitiesEs.controls; track item.value; let index =
+          $index) {
+          <li class="list-group-item">
+            <div class="manage-project__form-amenity">
+              <span>{{ item.value }}</span>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="removeAmenity('es', index)"
+              >
+                <img src="./assets/icons/remove.svg" alt="remove" />
+              </button>
+            </div>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="manage-project__form-lenguage">
+      <span>Texto en inglés</span>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="name_en"
+        />
+        <label for="floatingInput">Nombre en inglés</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="location_en"
+        />
+        <label for="floatingInput">Ubicación en inglés</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+          formControlName="details_en"
+        ></textarea>
+        <label for="floatingTextarea2">Detalles en inglés</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+          formControlName="description_en"
+        ></textarea>
+        <label for="floatingTextarea2">Descripción en inglés</label>
+      </div>
+      <div>
+        <div class="input-group mb-3">
+          <input
+            #amenityEn
+            type="text"
+            class="form-control"
+            placeholder="Amenidad en inglés"
+          />
+          <button
+            class="btn btn-success"
+            type="button"
+            (click)="addAmenity('en', amenityEn)"
+          >
+            <img src="./assets/icons/add.svg" alt="add" />
+          </button>
+        </div>
+        <ul class="list-group">
+          @for (item of amenitiesEn.controls; track item.value; let index =
+          $index) {
+          <li class="list-group-item">
+            <div class="manage-project__form-amenity">
+              <span>{{ item.value }}</span>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="removeAmenity('en', index)"
+              >
+                <img src="./assets/icons/remove.svg" alt="remove" />
+              </button>
+            </div>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="manage-project__form-quant">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="measure"
+        />
+        <label for="floatingInput">Tamaño</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="rooms"
+        />
+        <label for="floatingInput">Cant. Habitaciones</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="bathrooms"
+        />
+        <label for="floatingInput">Cant. Baños</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="garage"
+        />
+        <label for="floatingInput">Cant. Cochera</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="price"
+        />
+        <label for="floatingInput">Precio</label>
+      </div>
     </div>
     <div class="form-floating">
       <input
@@ -16,60 +217,7 @@
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
-      />
-      <label for="floatingInput">Ubicación</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Tamaño</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="number"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Cant. Habitaciones</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="number"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Cant. Baños</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="number"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Cant. Cochera</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="number"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-      />
-      <label for="floatingInput">Precio</label>
-    </div>
-    <div class="form-floating">
-      <input
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
+        formControlName="url_video"
       />
       <label for="floatingInput">Url youtube</label>
     </div>
@@ -79,43 +227,9 @@
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
+        formControlName="url_map"
       />
       <label for="floatingInput">Url mapa</label>
-    </div>
-    <div class="form-floating">
-      <textarea
-        class="form-control"
-        placeholder="Leave a comment here"
-        id="floatingTextarea2"
-        style="height: 100px"
-      ></textarea>
-      <label for="floatingTextarea2">Detalles</label>
-    </div>
-    <div class="form-floating">
-      <textarea
-        class="form-control"
-        placeholder="Leave a comment here"
-        id="floatingTextarea2"
-        style="height: 100px"
-      ></textarea>
-      <label for="floatingTextarea2">Descripción</label>
-    </div>
-    <div>
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Amenidades"
-          aria-label="Example text with button addon"
-          aria-describedby="button-addon1"
-        />
-        <button class="btn btn-success" type="button">
-          <img src="./assets/icons/add.svg" alt="add" />
-        </button>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item"></li>
-      </ul>
     </div>
     <div>
       <label for="formFile" class="form-label">
@@ -126,6 +240,30 @@
         <span>Aún no se agregan imágenes</span>
       </div>
     </div>
-    <button type="submit" class="btn btn-success mt-4">Guardar</button>
+    <div>
+      <label for="formFile" class="form-label"> Agregar PDF (Max 1mb) </label>
+      <input class="form-control" type="file" id="formFile" accept=".pdf" />
+    </div>
+    <div class="form-floating">
+      <select
+        class="form-select"
+        id="floatingSelect"
+        aria-label="Floating label select example"
+        formControlName="advisor"
+      >
+        <option selected></option>
+        @for (item of advisors; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+      <label for="floatingSelect">Seleccionar asesor</label>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-success mt-4"
+      [disabled]="form.invalid"
+    >
+      Guardar
+    </button>
   </form>
 </article>
