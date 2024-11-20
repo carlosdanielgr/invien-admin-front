@@ -23,8 +23,12 @@
       />
       <label for="floatingPassword">Contraseña</label>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-      Iniciar sesión
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid || loading"
+    >
+      {{ loading ? "Cargando..." : "Iniciar sesión" }}
     </button>
   </form>
 </article>
