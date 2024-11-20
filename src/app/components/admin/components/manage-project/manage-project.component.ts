@@ -7,8 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Advisor } from '@shared/project.interface';
+import { Router } from '@angular/router';
+
 import { AdvisorService } from '@shared/services/advisor.service';
+import { Advisor } from '@shared/project.interface';
+import { ProjectService } from '@shared/services/project.service';
 
 @Component({
   selector: 'app-manage-project',
@@ -22,9 +25,15 @@ export class ManageProjectComponent implements OnInit {
 
   advisors: Advisor[] = [];
 
+  listFiles: string[] = [];
+
+  loading = false;
+
   constructor(
     private readonly fb: FormBuilder,
-    private readonly advisorService: AdvisorService
+    private readonly advisorService: AdvisorService,
+    private readonly projectService: ProjectService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +70,7 @@ export class ManageProjectComponent implements OnInit {
       location_en: ['', Validators.required],
       advisor: ['', Validators.required],
       pdf: ['', Validators.required],
-      images: [[], Validators.required],
+      images: [[]],
     });
   }
 
@@ -77,7 +86,18 @@ export class ManageProjectComponent implements OnInit {
   }
 
   onSaveProject(): void {
-    console.log(this.form.value);
+    const body = new FormData();
+    Object.keys(this.form.value).forEach((key) => {
+      body.append(key, this.form.value[key]);
+    });
+    this.loading = true;
+    this.projectService.postCreateProject(body).subscribe({
+      next: () => {
+        this.form.reset();
+        this.listFiles = [];
+        this.router.navigate(['/admin/projects']);
+      },
+    });
   }
 
   onFilePdfChange(event: any): void {
@@ -85,9 +105,18 @@ export class ManageProjectComponent implements OnInit {
   }
 
   onFileImagesChange(event: any): void {
-    console.log(event.target.files);
+    const images: string[] = this.form.get('images')?.value || [];
+    Object.keys(event.target.files).forEach((key) => {
+      images.push(event.target.files[key]);
+      this.listFiles.push(URL.createObjectURL(event.target.files[key]));
+    });
+  }
 
-    // this.form.get('images')?.setValue(event.target.files);
+  onRemoveImage(index: number): void {
+    const images: string[] = this.form.get('images')?.value || [];
+    images.splice(index, 1);
+    this.listFiles.splice(index, 1);
+    this.form.get('images')?.setValue(images);
   }
 
   get amenitiesEs(): FormArray {

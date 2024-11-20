@@ -49,13 +49,26 @@
     }
     &__list-img {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
       padding: 1rem;
       min-height: 100px;
       background-color: var(--bs-gray-200);
+    }
+    &__images {
+      position: relative;
+      width: 8rem;
+      > img {
+        height: 8rem;
+        object-fit: cover;
+      }
+      > button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.1rem 0.3rem;
+      }
     }
   }
 }

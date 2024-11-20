@@ -13,4 +13,8 @@ export class ProjectService {
   getAllProjects() {
     return this.http.get<Project[]>(`${this.API_URL}all/es`);
   }
+
+  postCreateProject(project: FormData) {
+    return this.http.post(`${this.API_URL}create`, project);
+  }
 }
