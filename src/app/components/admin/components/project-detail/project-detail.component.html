@@ -1,0 +1,124 @@
+<article class="property-detail">
+  <div
+    id="carouselExampleAutoplaying2"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      @for (item of project.images; track $index; let first = $first) {
+      <div class="carousel-item" [class.active]="first">
+        <img
+          class="property-detail__carousel-img"
+          [src]="apiUrl + item"
+          [alt]="item"
+        />
+      </div>
+      }
+    </div>
+    <div class="property-detail__carousel-btn">
+      <button
+        class="btn carousel-btn mx-2"
+        type="button"
+        data-bs-target="#carouselExampleAutoplaying2"
+        data-bs-slide="prev"
+      >
+        <img src="./assets/icons/arrow-left.svg" alt="left" />
+      </button>
+      <button
+        class="btn carousel-btn"
+        type="button"
+        data-bs-target="#carouselExampleAutoplaying2"
+        data-bs-slide="next"
+      >
+        <img src="./assets/icons/arrow-right.svg" alt="right" />
+      </button>
+    </div>
+  </div>
+  <div class="property-detail__props section">
+    <div>
+      <h1 class="property-detail__props-title">{{ project.name }}</h1>
+      <span class="property-detail__props-type">{{ project.location }}</span>
+    </div>
+    <div class="property-detail__props-features">
+      <div>
+        <img src="./assets/icons/measures.svg" alt="measures" />
+        <span>{{ project.total_size }}</span>
+        <span>Terreno</span>
+      </div>
+      <div>
+        <img src="./assets/icons/measures.svg" alt="measures" />
+        <span>{{ project.built_size }}</span>
+        <span>Construccion</span>
+      </div>
+      <div>
+        <img src="./assets/icons/room.svg" alt="room" />
+        <span>{{ project.rooms }} Habitaciones</span>
+      </div>
+      <div>
+        <img src="./assets/icons/bathroom.svg" alt="bathroom" />
+        <span>{{ project.bathrooms }} Baños</span>
+      </div>
+      <div>
+        <img src="./assets/icons/garage.svg" alt="garage" />
+        <span>{{ project.garage }} Cochera</span>
+      </div>
+    </div>
+    <div class="property-detail__props-price">
+      <span>En Venta</span>
+      <span>{{ project.price }}</span>
+    </div>
+  </div>
+</article>
+<div class="property-detail__description section">
+  <div class="property-detail__description-content">
+    <div class="property-detail__description-info">
+      <div>
+        <h2 class="property-detail__description-title">Descripción</h2>
+        <p class="property-detail__description-text">
+          {{ project.description }}
+        </p>
+      </div>
+      <div>
+        <h2 class="property-detail__description-title">Detalles</h2>
+        <span class="property-detail__description-text">
+          {{ project.details }}
+        </span>
+      </div>
+      <div>
+        <h3 class="property-detail__description-title">Amenidades</h3>
+        @for (item of project.amenities; track $index) {
+        <span class="property-detail__description-amenity">
+          <img src="./assets/icons/check-gray.svg" alt="check-gray" />
+          {{ item }}
+        </span>
+        }
+      </div>
+      <button class="btn btn-outline-primary">
+        <i class="bi bi-printer"></i> Imprimir Propiedad
+      </button>
+    </div>
+  </div>
+  <div></div>
+</div>
+<div class="property-detail__video section">
+  <iframe
+    height="570"
+    [src]="project.url_video"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+<div class="section">
+  <iframe
+    [src]="project.url_map"
+    width="100%"
+    height="450"
+    style="border: 0"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>

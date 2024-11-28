@@ -24,6 +24,12 @@ export class ProjectCardComponent {
     private readonly projectService: ProjectService
   ) {}
 
+  viewProject() {
+    this.router.navigate(['admin', 'project-detail'], {
+      state: this.project,
+    });
+  }
+
   editProject() {
     this.router.navigate(['admin', 'project-edit'], {
       state: this.projectService.originalData.find(

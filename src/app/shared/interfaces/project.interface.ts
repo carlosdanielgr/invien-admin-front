@@ -4,7 +4,8 @@ export interface Project {
   description: string;
   images: string[];
   price: string;
-  measure: string;
+  total_size: string;
+  built_size: string;
   rooms: number;
   bathrooms: number;
   garage: number;
@@ -25,7 +26,8 @@ export interface OriginalData {
   description_en: string;
   images: string[];
   price: string;
-  measure: string;
+  total_size: string;
+  built_size: string;
   rooms: number;
   bathrooms: number;
   garage: number;

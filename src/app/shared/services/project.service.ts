@@ -4,7 +4,7 @@ import { environment } from '@environment/environment';
 
 import { Response } from '@shared/interfaces/response.interface';
 import { OriginalData, Project } from '@shared/interfaces/project.interface';
-import { shareReplay, switchMap } from 'rxjs';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
