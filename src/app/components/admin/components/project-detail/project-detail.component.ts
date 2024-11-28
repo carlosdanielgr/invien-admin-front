@@ -27,4 +27,8 @@ export class ProjectDetailComponent implements OnInit {
       this.project.url_map
     ) as string;
   }
+
+  onPrintPdf(): void {
+    window.open(this.apiUrl + this.project.pdf, '_blank');
+  }
 }
