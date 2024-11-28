@@ -16,8 +16,8 @@ export class HeaderComponent {
   ) {}
 
   onLogout() {
+    this.authService.postLogout().subscribe();
     localStorage.removeItem('token');
     this.router.navigate(['/']);
-    this.authService.postLogout().subscribe();
   }
 }

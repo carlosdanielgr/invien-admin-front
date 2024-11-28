@@ -56,7 +56,8 @@ export class ManageProjectComponent implements OnInit {
       description_es: ['', Validators.required],
       description_en: ['', Validators.required],
       price: ['', Validators.required],
-      measure: ['', Validators.required],
+      built_size: ['', Validators.required],
+      total_size: ['', Validators.required],
       rooms: ['', Validators.required],
       bathrooms: ['', Validators.required],
       garage: ['', Validators.required],
@@ -68,7 +69,7 @@ export class ManageProjectComponent implements OnInit {
       url_map: ['', Validators.required],
       location_es: ['', Validators.required],
       location_en: ['', Validators.required],
-      advisor: ['', Validators.required],
+      advisorId: ['', Validators.required],
       pdf: ['', Validators.required],
       images: [[]],
     });
@@ -83,21 +84,6 @@ export class ManageProjectComponent implements OnInit {
   removeAmenity(i18n: string, index: number): void {
     if (i18n === 'es') this.amenitiesEs.removeAt(index);
     else this.amenitiesEn.removeAt(index);
-  }
-
-  onSaveProject(): void {
-    const body = new FormData();
-    Object.keys(this.form.value).forEach((key) => {
-      body.append(key, this.form.value[key]);
-    });
-    this.loading = true;
-    this.projectService.postCreateProject(body).subscribe({
-      next: () => {
-        this.form.reset();
-        this.listFiles = [];
-        this.router.navigate(['/admin/projects']);
-      },
-    });
   }
 
   onFilePdfChange(event: any): void {
@@ -117,6 +103,25 @@ export class ManageProjectComponent implements OnInit {
     images.splice(index, 1);
     this.listFiles.splice(index, 1);
     this.form.get('images')?.setValue(images);
+  }
+
+  onSaveProject(): void {
+    const body = new FormData();
+    Object.keys(this.form.value).forEach((key) => {
+      if (key === 'images')
+        this.form.value[key].forEach((image: any) => body.append(key, image));
+      else if (key === 'amenities_es' || key === 'amenities_en')
+        body.append(key, JSON.stringify(this.form.value[key]));
+      else body.append(key, this.form.value[key]);
+    });
+    this.loading = true;
+    this.projectService.postCreateProject(body).subscribe({
+      next: () => {
+        this.form.reset();
+        this.listFiles = [];
+        this.router.navigate(['admin']);
+      },
+    });
   }
 
   get amenitiesEs(): FormArray {

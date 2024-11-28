@@ -1,9 +1,9 @@
 <article class="projects">
-  @for (project of projects; track $index) {
+  @for (project of projectsService.projects; track $index) {
   <app-project-card [project]="project" />
   }
 </article>
-@if(!projects.length){
+@if(!projectsService.projects.length){
 <div class="projects__no-data">
   <p>Aún no se ha creado ningún proyecto</p>
   <button type="button" class="btn btn-success" routerLink="project-add">

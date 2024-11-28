@@ -7,6 +7,7 @@
   >
     <div class="manage-project__form-lenguage">
       <span>Texto en español</span>
+      <span>Texto en inglés</span>
       <div class="form-floating">
         <input
           type="text"
@@ -23,9 +24,29 @@
           class="form-control"
           id="floatingInput"
           placeholder="name@example.com"
+          formControlName="name_en"
+        />
+        <label for="floatingInput">Nombre en inglés</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
           formControlName="location_es"
         />
         <label for="floatingInput">Ubicación en español</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="location_en"
+        />
+        <label for="floatingInput">Ubicación en inglés</label>
       </div>
       <div class="form-floating">
         <textarea
@@ -43,9 +64,29 @@
           placeholder="Leave a comment here"
           id="floatingTextarea2"
           style="height: 100px"
+          formControlName="details_en"
+        ></textarea>
+        <label for="floatingTextarea2">Detalles en inglés</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
           formControlName="description_es"
         ></textarea>
         <label for="floatingTextarea2">Descripción en español</label>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+          formControlName="description_en"
+        ></textarea>
+        <label for="floatingTextarea2">Descripción en inglés</label>
       </div>
       <div>
         <div class="input-group mb-3">
@@ -80,49 +121,6 @@
           </li>
           }
         </ul>
-      </div>
-    </div>
-    <div class="manage-project__form-lenguage">
-      <span>Texto en inglés</span>
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-          formControlName="name_en"
-        />
-        <label for="floatingInput">Nombre en inglés</label>
-      </div>
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-          formControlName="location_en"
-        />
-        <label for="floatingInput">Ubicación en inglés</label>
-      </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="details_en"
-        ></textarea>
-        <label for="floatingTextarea2">Detalles en inglés</label>
-      </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="description_en"
-        ></textarea>
-        <label for="floatingTextarea2">Descripción en inglés</label>
       </div>
       <div>
         <div class="input-group mb-3">
@@ -166,9 +164,19 @@
           class="form-control"
           id="floatingInput"
           placeholder="name@example.com"
-          formControlName="measure"
+          formControlName="built_size"
         />
-        <label for="floatingInput">Tamaño</label>
+        <label for="floatingInput">Tamaño construido</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="total_size"
+        />
+        <label for="floatingInput">Tamaño total</label>
       </div>
       <div class="form-floating">
         <input
@@ -275,7 +283,7 @@
         class="form-select"
         id="floatingSelect"
         aria-label="Floating label select example"
-        formControlName="advisor"
+        formControlName="advisorId"
       >
         <option selected></option>
         @for (item of advisors; track $index) {
