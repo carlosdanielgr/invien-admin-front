@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 
 import { Response } from '@shared/interfaces/response.interface';
-import { OriginalData, Project } from '@shared/project.interface';
+import { OriginalData, Project } from '@shared/interfaces/project.interface';
 import { shareReplay, switchMap } from 'rxjs';
 
 @Injectable({
@@ -15,6 +15,8 @@ export class ProjectService {
   projects: Project[] = [];
 
   originalData: OriginalData[] = [];
+
+  loading = false;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -34,18 +36,27 @@ export class ProjectService {
     return this.http.patch(`${this.API_URL}update/${id}`, project);
   }
 
+  deleteProject(id: string) {
+    return this.http.delete(`${this.API_URL}delete/${id}`);
+  }
+
   initAllProjects() {
     if (this.projects.length) return;
     this.newSubscribeToProjects();
   }
 
   newSubscribeToProjects() {
+    this.loading = true;
     this.getAllProjects()
       .pipe(shareReplay())
       .subscribe({
         next: (res) => {
           this.projects = res.data;
           this.originalData = res.originalData;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
         },
       });
   }

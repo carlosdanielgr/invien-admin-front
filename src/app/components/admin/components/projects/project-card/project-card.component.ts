@@ -1,6 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from '@shared/project.interface';
+
+import {
+  confirmAlertLoading,
+  successAlert,
+} from '@shared/functions/confirm-alert.function';
+import { errorFn } from '@shared/functions/errors.function';
+import { Project } from '@shared/interfaces/project.interface';
 import { ProjectService } from '@shared/services/project.service';
 
 @Component({
@@ -26,5 +32,18 @@ export class ProjectCardComponent {
     });
   }
 
-  deleteProject() {}
+  deleteProject() {
+    const request = () => {
+      this.projectService.deleteProject(this.project.id as string).subscribe({
+        next: () => {
+          successAlert('Proyecto eliminado correctamente');
+          this.projectService.newSubscribeToProjects();
+        },
+        error: () => {
+          errorFn('Error al eliminar el proyecto');
+        },
+      });
+    };
+    confirmAlertLoading('Este proyecto será eliminado', request);
+  }
 }

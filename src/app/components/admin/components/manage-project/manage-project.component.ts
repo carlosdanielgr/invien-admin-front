@@ -9,12 +9,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AdvisorService } from '@shared/services/advisor.service';
-import { Advisor, OriginalData } from '@shared/project.interface';
-import { ProjectService } from '@shared/services/project.service';
 import { environment } from '@environment/environment';
-import Swal from 'sweetalert2';
-import { errorFn } from '@shared/errors';
+import { AdvisorService } from '@shared/services/advisor.service';
+import { Advisor, OriginalData } from '@shared/interfaces/project.interface';
+import { ProjectService } from '@shared/services/project.service';
+import { errorFn } from '@shared/functions/errors.function';
 
 @Component({
   selector: 'app-manage-project',
@@ -151,7 +150,7 @@ export class ManageProjectComponent implements OnInit {
       },
       error: () => {
         this.loading = false;
-        Swal.fire(errorFn('Error al crear el proyecto'));
+        errorFn('Error al crear el proyecto');
       },
     });
   }
@@ -190,7 +189,7 @@ export class ManageProjectComponent implements OnInit {
         },
         error: () => {
           this.loading = false;
-          Swal.fire(errorFn('Error al editar el proyecto'));
+          errorFn('Error al editar el proyecto');
         },
       });
   }

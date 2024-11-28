@@ -3,11 +3,13 @@
   <app-project-card [project]="project" />
   }
 </article>
-@if(!projectsService.projects.length){
+@if(!projectsService.projects.length && !projectsService.loading) {
 <div class="projects__no-data">
   <p>Aún no se ha creado ningún proyecto</p>
   <button type="button" class="btn btn-success" routerLink="project-add">
     Agregar proyecto
   </button>
 </div>
+}@else if(projectsService.loading) {
+<app-loading />
 }

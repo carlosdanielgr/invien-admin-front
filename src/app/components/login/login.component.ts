@@ -6,9 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
-import { errorFn } from '@shared/errors';
+import { errorFn } from '@shared/functions/errors.function';
 import { AuthService, Login } from '@shared/services/auth.service';
 
 @Component({
@@ -39,9 +38,8 @@ export class LoginComponent {
         this.router.navigate(['admin']);
       },
       error: (error) => {
-        Swal.fire(errorFn('Usuario o contraseña incorrecta'));
+        errorFn('Usuario o contraseña incorrecta');
         this.loading = false;
-        console.error(error);
       },
     });
   }
