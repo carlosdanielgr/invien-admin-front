@@ -27,6 +27,13 @@ export const routes: Routes = [
             './components/admin/components/manage-project/manage-project.component'
           ).then((c) => c.ManageProjectComponent),
       },
+      {
+        path: 'project-edit',
+        loadComponent: () =>
+          import(
+            './components/admin/components/manage-project/manage-project.component'
+          ).then((c) => c.ManageProjectComponent),
+      },
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

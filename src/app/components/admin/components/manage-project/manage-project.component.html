@@ -1,10 +1,6 @@
 <article class="manage-project">
-  <h1>Agregar proyecto</h1>
-  <form
-    class="manage-project__form"
-    [formGroup]="form"
-    (ngSubmit)="onSaveProject()"
-  >
+  <h1>{{ isEdit ? "Editar" : "Agregar" }} proyecto</h1>
+  <form class="manage-project__form" [formGroup]="form">
     <div class="manage-project__form-lenguage">
       <span>Texto en español</span>
       <span>Texto en inglés</span>
@@ -293,11 +289,12 @@
       <label for="floatingSelect">Seleccionar asesor</label>
     </div>
     <button
-      type="submit"
-      class="btn btn-success mt-4"
-      [disabled]="form.invalid || loading"
+      type="button"
+      class="btn btn-{{ isEdit ? 'warning' : 'success' }} mt-4"
+      [disabled]="(form.invalid && !isEdit) || loading"
+      (click)="handleProject()"
     >
-      {{ loading ? "Guardando..." : "Guardar" }}
+      {{ loading ? "Guardando..." : isEdit ? "Editar" : "Guardar" }}
     </button>
   </form>
 </article>

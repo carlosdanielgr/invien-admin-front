@@ -10,8 +10,11 @@ import {
 import { Router } from '@angular/router';
 
 import { AdvisorService } from '@shared/services/advisor.service';
-import { Advisor } from '@shared/project.interface';
+import { Advisor, OriginalData } from '@shared/project.interface';
 import { ProjectService } from '@shared/services/project.service';
+import { environment } from '@environment/environment';
+import Swal from 'sweetalert2';
+import { errorFn } from '@shared/errors';
 
 @Component({
   selector: 'app-manage-project',
@@ -27,7 +30,13 @@ export class ManageProjectComponent implements OnInit {
 
   listFiles: string[] = [];
 
+  filesToDelete: string[] = [];
+
+  project: Partial<OriginalData> = {};
+
   loading = false;
+
+  isEdit = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -39,6 +48,23 @@ export class ManageProjectComponent implements OnInit {
   ngOnInit(): void {
     this.formInit();
     this.getAdvisors();
+    this.isEdit = this.router.url === '/admin/project-edit';
+    if (this.isEdit) this.editProject();
+  }
+
+  private editProject(): void {
+    this.project = history.state;
+    const { images, amenities_en, amenities_es, ...data } = this
+      .project as OriginalData;
+    this.form.patchValue({
+      ...data,
+      advisorId: data.advisor.id,
+    });
+    amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
+    amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
+    this.listFiles = images.map(
+      (i: string) => `${environment.apiUrl}uploads/${i}`
+    );
   }
 
   private getAdvisors(): void {
@@ -101,27 +127,88 @@ export class ManageProjectComponent implements OnInit {
   onRemoveImage(index: number): void {
     const images: string[] = this.form.get('images')?.value || [];
     images.splice(index, 1);
+    if (this.isEdit)
+      this.filesToDelete = [
+        ...this.filesToDelete,
+        this.listFiles[index].split('/').pop()!,
+      ];
     this.listFiles.splice(index, 1);
     this.form.get('images')?.setValue(images);
   }
 
-  onSaveProject(): void {
-    const body = new FormData();
-    Object.keys(this.form.value).forEach((key) => {
-      if (key === 'images')
-        this.form.value[key].forEach((image: any) => body.append(key, image));
-      else if (key === 'amenities_es' || key === 'amenities_en')
-        body.append(key, JSON.stringify(this.form.value[key]));
-      else body.append(key, this.form.value[key]);
-    });
+  handleProject() {
+    if (this.isEdit) this.onEditProject();
+    else this.onSaveProject();
+  }
+
+  private onSaveProject(): void {
+    const body = this.handleFormData(this.form.value);
     this.loading = true;
     this.projectService.postCreateProject(body).subscribe({
       next: () => {
-        this.form.reset();
-        this.listFiles = [];
+        this.projectService.newSubscribeToProjects();
         this.router.navigate(['admin']);
       },
+      error: () => {
+        this.loading = false;
+        Swal.fire(errorFn('Error al crear el proyecto'));
+      },
     });
+  }
+
+  private onEditProject(): void {
+    const data: any = {};
+    const { images, amenities_en, amenities_es, ...form } = this.form.value;
+    Object.keys(form).forEach((key) => {
+      if (key === 'advisorId') {
+        if (form[key] !== this.project?.advisor?.id) data[key] = form[key];
+      } else if (form[key] !== this.project[key as keyof OriginalData])
+        data[key] = form[key];
+    });
+    if (images.length) data.images = images;
+    if (this.filesToDelete.length) data.filesToDelete = this.filesToDelete;
+
+    const validContentArray = (arr1: string[], arr2: string[]) => {
+      const strArr1 = JSON.stringify(arr1);
+      const strArr2 = JSON.stringify(arr2);
+      return strArr1 !== strArr2;
+    };
+
+    if (validContentArray(amenities_en, this.project.amenities_en as string[]))
+      data.amenities_en = amenities_en;
+    if (validContentArray(amenities_es, this.project.amenities_es as string[]))
+      data.amenities_es = amenities_es;
+
+    const body = this.handleFormData(data);
+    this.loading = true;
+    this.projectService
+      .patchUpdateProject(body, this.project.id as string)
+      .subscribe({
+        next: () => {
+          this.projectService.newSubscribeToProjects();
+          this.router.navigate(['admin']);
+        },
+        error: () => {
+          this.loading = false;
+          Swal.fire(errorFn('Error al editar el proyecto'));
+        },
+      });
+  }
+
+  private handleFormData(data: Record<string, any>): FormData {
+    const body = new FormData();
+    Object.keys(data).forEach((key) => {
+      if (key === 'images')
+        data[key].forEach((image: any) => body.append(key, image));
+      else if (
+        key === 'amenities_es' ||
+        key === 'amenities_en' ||
+        key === 'filesToDelete'
+      )
+        body.append(key, JSON.stringify(data[key]));
+      else body.append(key, data[key]);
+    });
+    return body;
   }
 
   get amenitiesEs(): FormArray {
