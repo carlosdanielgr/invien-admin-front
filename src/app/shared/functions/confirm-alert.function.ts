@@ -1,17 +1,17 @@
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 const confirmAlert = (text?: string, preConfirm?: any) => {
-  let swal: any = {
+  let swal: SweetAlertOptions = {
     title: '¿Estás seguro(a)?',
     text: text || '',
     icon: 'question',
     showCancelButton: true,
     allowOutsideClick: true,
     allowEscapeKey: true,
-    confirmButtonText: '¡Sí, confirmar!',
+    confirmButtonText: 'Eliminar',
     cancelButtonText: 'Cancelar',
-    confirmButtonColor: '#198754',
-    cancelButtonColor: '#dc3545',
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#6c757d',
     reverseButtons: true,
   };
   if (preConfirm) {

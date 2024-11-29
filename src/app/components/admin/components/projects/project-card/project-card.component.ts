@@ -50,6 +50,9 @@ export class ProjectCardComponent {
         },
       });
     };
-    confirmAlertLoading('Este proyecto será eliminado', request);
+    confirmAlertLoading(
+      `Propiedad: ${this.project.name}, será eliminada`,
+      request
+    );
   }
 }

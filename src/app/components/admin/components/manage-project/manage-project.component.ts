@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
 
 import { environment } from '@environment/environment';
 import { AdvisorService } from '@shared/services/advisor.service';
@@ -18,11 +19,11 @@ import { errorFn } from '@shared/functions/errors.function';
 @Component({
   selector: 'app-manage-project',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgxEditorModule],
   templateUrl: './manage-project.component.html',
   styleUrl: './manage-project.component.scss',
 })
-export class ManageProjectComponent implements OnInit {
+export class ManageProjectComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
   advisors: Advisor[] = [];
@@ -32,6 +33,18 @@ export class ManageProjectComponent implements OnInit {
   filesToDelete: string[] = [];
 
   project: Partial<OriginalData> = {};
+
+  editor: Editor[] = [new Editor(), new Editor(), new Editor(), new Editor()];
+
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   loading = false;
 
@@ -49,6 +62,10 @@ export class ManageProjectComponent implements OnInit {
     this.getAdvisors();
     this.isEdit = this.router.url === '/admin/project-edit';
     if (this.isEdit) this.editProject();
+  }
+
+  ngOnDestroy(): void {
+    this.editor.forEach((e) => e.destroy());
   }
 
   private editProject(): void {

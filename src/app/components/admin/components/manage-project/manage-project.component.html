@@ -44,45 +44,33 @@
         />
         <label for="floatingInput">Ubicación en inglés</label>
       </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="details_es"
-        ></textarea>
-        <label for="floatingTextarea2">Detalles en español</label>
+      <div>
+        <label class="mb-2">Detalles en español</label>
+        <ngx-editor-menu [editor]="editor[0]" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor[0]" formControlName="details_es">
+        </ngx-editor>
       </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="details_en"
-        ></textarea>
-        <label for="floatingTextarea2">Detalles en inglés</label>
+      <div>
+        <label class="mb-2">Detalles en inglés</label>
+        <ngx-editor-menu [editor]="editor[1]" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor[1]" formControlName="details_en">
+        </ngx-editor>
       </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="description_es"
-        ></textarea>
-        <label for="floatingTextarea2">Descripción en español</label>
+      <div>
+        <label class="mb-2">Descripción en español</label>
+        <ngx-editor-menu [editor]="editor[2]" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor[2]" formControlName="description_es">
+        </ngx-editor>
       </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea2"
-          style="height: 100px"
-          formControlName="description_en"
-        ></textarea>
-        <label for="floatingTextarea2">Descripción en inglés</label>
+      <div>
+        <label class="mb-2">Descripción en inglés</label>
+        <ngx-editor-menu [editor]="editor[3]" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor[3]" formControlName="description_en">
+        </ngx-editor>
       </div>
       <div>
         <div class="input-group mb-3">
@@ -215,25 +203,36 @@
         <label for="floatingInput">Precio</label>
       </div>
     </div>
-    <div class="form-floating">
-      <input
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-        formControlName="url_video"
-      />
-      <label for="floatingInput">Url youtube</label>
+    <div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="url_video"
+        />
+        <label for="floatingInput">Url youtube</label>
+      </div>
+      <div class="manage-project__steps">
+        <img src="./assets/images/first-step.png" alt="first" />
+        <img src="./assets/images/second-step.png" alt="first" />
+      </div>
     </div>
-    <div class="form-floating">
-      <input
-        type="text"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-        formControlName="url_map"
-      />
-      <label for="floatingInput">Url mapa</label>
+    <div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="url_map"
+        />
+        <label for="floatingInput">Url mapa</label>
+      </div>
+      <div class="pt-2">
+        <img src="./assets/images/map.png" alt="first" />
+      </div>
     </div>
     <div>
       <label for="formFile" class="form-label">
@@ -281,7 +280,6 @@
         aria-label="Floating label select example"
         formControlName="advisorId"
       >
-        <option selected></option>
         @for (item of advisors; track $index) {
         <option [value]="item.id">{{ item.name }}</option>
         }

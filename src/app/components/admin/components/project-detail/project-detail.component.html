@@ -42,12 +42,12 @@
     <div class="property-detail__props-features">
       <div>
         <img src="./assets/icons/measures.svg" alt="measures" />
-        <span>{{ project.total_size }}</span>
+        <span>{{ project.total_size }} m2</span>
         <span>Terreno</span>
       </div>
       <div>
         <img src="./assets/icons/measures.svg" alt="measures" />
-        <span>{{ project.built_size }}</span>
+        <span>{{ project.built_size }} m2</span>
         <span>Construccion</span>
       </div>
       <div>
@@ -65,7 +65,7 @@
     </div>
     <div class="property-detail__props-price">
       <span>En Venta</span>
-      <span>{{ project.price }}</span>
+      <span>$ {{ project.price }}</span>
     </div>
   </div>
 </article>
@@ -74,15 +74,17 @@
     <div class="property-detail__description-info">
       <div>
         <h2 class="property-detail__description-title">Descripción</h2>
-        <p class="property-detail__description-text">
-          {{ project.description }}
-        </p>
+        <div
+          class="property-detail__description-texts"
+          [innerHTML]="project.description"
+        ></div>
       </div>
       <div>
         <h2 class="property-detail__description-title">Detalles</h2>
-        <span class="property-detail__description-text">
-          {{ project.details }}
-        </span>
+        <div
+          class="property-detail__description-texts"
+          [innerHTML]="project.details"
+        ></div>
       </div>
       <div>
         <h3 class="property-detail__description-title">Amenidades</h3>
