@@ -21,14 +21,10 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit(): void {
     this.project = history.state;
     this.project.url_video = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.project.url_video
+      this.project.url_video,
     ) as string;
     this.project.url_map = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.project.url_map
+      this.project.url_map,
     ) as string;
-  }
-
-  onPrintPdf(): void {
-    window.open(this.apiUrl + this.project.pdf, '_blank');
   }
 }

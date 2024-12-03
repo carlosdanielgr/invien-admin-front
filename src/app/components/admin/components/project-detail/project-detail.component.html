@@ -6,13 +6,13 @@
   >
     <div class="carousel-inner">
       @for (item of project.images; track $index; let first = $first) {
-      <div class="carousel-item" [class.active]="first">
-        <img
-          class="property-detail__carousel-img"
-          [src]="apiUrl + item"
-          [alt]="item"
-        />
-      </div>
+        <div class="carousel-item" [class.active]="first">
+          <img
+            class="property-detail__carousel-img"
+            [src]="apiUrl + 'images/' + item"
+            [alt]="item"
+          />
+        </div>
       }
     </div>
     <div class="property-detail__carousel-btn">
@@ -37,7 +37,10 @@
   <div class="property-detail__props section">
     <div>
       <h1 class="property-detail__props-title">{{ project.name }}</h1>
-      <span class="property-detail__props-type">{{ project.location }}</span>
+      <span class="property-detail__props-type"
+        >{{ project.location }}, {{ project.state.state_es }},
+        {{ project.town.town_es }}</span
+      >
     </div>
     <div class="property-detail__props-features">
       <div>
@@ -89,15 +92,12 @@
       <div>
         <h3 class="property-detail__description-title">Amenidades</h3>
         @for (item of project.amenities; track $index) {
-        <span class="property-detail__description-amenity">
-          <img src="./assets/icons/check-gray.svg" alt="check-gray" />
-          {{ item }}
-        </span>
+          <span class="property-detail__description-amenity">
+            <img src="./assets/icons/check-gray.svg" alt="check-gray" />
+            {{ item }}
+          </span>
         }
       </div>
-      <button class="btn btn-outline-primary" (click)="onPrintPdf()">
-        <i class="bi bi-printer"></i> Imprimir Propiedad
-      </button>
     </div>
     <div class="property-detail__advisor">
       <img

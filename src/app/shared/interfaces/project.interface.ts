@@ -1,3 +1,5 @@
+import { Country, State, Town } from './location.interface';
+
 export interface Project {
   id: string;
   name: string;
@@ -16,6 +18,10 @@ export interface Project {
   location: string;
   pdf: string;
   advisor: Advisor;
+  country: Country;
+  state: State;
+  town: Town;
+  type: Type;
 }
 
 export interface OriginalData {
@@ -41,6 +47,10 @@ export interface OriginalData {
   location_en: string;
   pdf: string;
   advisor: Advisor;
+  country: Country;
+  state: State;
+  town: Town;
+  type: Type;
 }
 
 export interface Advisor {
@@ -49,4 +59,10 @@ export interface Advisor {
   phone: string;
   email: string;
   image: string;
+}
+
+export interface Type {
+  id: string;
+  type_es: string;
+  type_en: string;
 }

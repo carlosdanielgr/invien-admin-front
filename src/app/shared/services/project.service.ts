@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environment/environment';
-
-import { Response } from '@shared/interfaces/response.interface';
-import { OriginalData, Project } from '@shared/interfaces/project.interface';
 import { shareReplay } from 'rxjs';
+
+import { environment } from '@environment/environment';
+import { Response } from '@shared/interfaces/response.interface';
+import {
+  OriginalData,
+  Project,
+  Type,
+} from '@shared/interfaces/project.interface';
+import { Locations } from '@shared/interfaces/location.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +39,14 @@ export class ProjectService {
 
   patchUpdateProject(project: FormData, id: string) {
     return this.http.patch(`${this.API_URL}update/${id}`, project);
+  }
+
+  getLocations() {
+    return this.http.get<Locations>(`${environment.apiUrl}location`);
+  }
+
+  getTypes() {
+    return this.http.get<Type[]>(`${this.API_URL}types`);
   }
 
   deleteProject(id: string) {

@@ -12,9 +12,14 @@ import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
 
 import { environment } from '@environment/environment';
 import { AdvisorService } from '@shared/services/advisor.service';
-import { Advisor, OriginalData } from '@shared/interfaces/project.interface';
+import {
+  Advisor,
+  OriginalData,
+  Type,
+} from '@shared/interfaces/project.interface';
 import { ProjectService } from '@shared/services/project.service';
 import { errorFn } from '@shared/functions/errors.function';
+import { Locations } from '@shared/interfaces/location.interface';
 
 @Component({
   selector: 'app-manage-project',
@@ -27,6 +32,14 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
   advisors: Advisor[] = [];
+
+  types: Type[] = [];
+
+  locations: Locations = {
+    countries: [],
+    states: [],
+    towns: [],
+  };
 
   listFiles: string[] = [];
 
@@ -54,12 +67,14 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     private readonly fb: FormBuilder,
     private readonly advisorService: AdvisorService,
     private readonly projectService: ProjectService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
     this.formInit();
     this.getAdvisors();
+    this.getLocations();
+    this.getTypes();
     this.isEdit = this.router.url === '/admin/project-edit';
     if (this.isEdit) this.editProject();
   }
@@ -75,11 +90,15 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       ...data,
       advisorId: data.advisor.id,
+      countryId: data.country.id,
+      stateId: data.state.id,
+      townId: data.town.id,
+      typeId: data.type.id,
     });
     amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
     amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
     this.listFiles = images.map(
-      (i: string) => `${environment.apiUrl}uploads/${i}`
+      (i: string) => `${environment.apiUrl}uploads/images/${i}`,
     );
   }
 
@@ -91,10 +110,30 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getLocations(): void {
+    this.projectService.getLocations().subscribe({
+      next: (res) => {
+        this.locations = res;
+      },
+    });
+  }
+
+  private getTypes(): void {
+    this.projectService.getTypes().subscribe({
+      next: (res) => {
+        this.types = res;
+      },
+    });
+  }
+
   private formInit(): void {
     this.form = this.fb.group({
       name_es: ['', Validators.required],
       name_en: ['', Validators.required],
+      countryId: ['', Validators.required],
+      stateId: ['', Validators.required],
+      townId: ['', Validators.required],
+      typeId: ['', Validators.required],
       description_es: ['', Validators.required],
       description_en: ['', Validators.required],
       price: ['', Validators.required],
@@ -112,7 +151,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       location_es: ['', Validators.required],
       location_en: ['', Validators.required],
       advisorId: ['', Validators.required],
-      pdf: ['', Validators.required],
       images: [[]],
     });
   }
@@ -126,10 +164,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
   removeAmenity(i18n: string, index: number): void {
     if (i18n === 'es') this.amenitiesEs.removeAt(index);
     else this.amenitiesEn.removeAt(index);
-  }
-
-  onFilePdfChange(event: any): void {
-    this.form.get('pdf')?.setValue(event.target.files[0]);
   }
 
   onFileImagesChange(event: any): void {
