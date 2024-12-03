@@ -89,7 +89,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       .project as OriginalData;
     this.form.patchValue({
       ...data,
-      advisorId: data.advisor.id,
       countryId: data.country.id,
       stateId: data.state.id,
       townId: data.town.id,
@@ -105,7 +104,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
   private getAdvisors(): void {
     this.advisorService.getAllAdvisors().subscribe({
       next: (res) => {
-        this.advisors = res;
+        this.advisors = res.data;
       },
     });
   }
@@ -210,8 +209,18 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     const data: any = {};
     const { images, amenities_en, amenities_es, ...form } = this.form.value;
     Object.keys(form).forEach((key) => {
-      if (key === 'advisorId') {
-        if (form[key] !== this.project?.advisor?.id) data[key] = form[key];
+      if (
+        key === 'countryId' ||
+        key === 'stateId' ||
+        key === 'townId' ||
+        key === 'typeId'
+      ) {
+        const keyLocation = key.slice(0, -2) as
+          | 'country'
+          | 'state'
+          | 'town'
+          | 'type';
+        if (form[key] !== this.project[keyLocation]?.id) data[key] = form[key];
       } else if (form[key] !== this.project[key as keyof OriginalData])
         data[key] = form[key];
     });

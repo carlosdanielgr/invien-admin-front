@@ -99,17 +99,19 @@
         }
       </div>
     </div>
-    <div class="property-detail__advisor">
-      <img
-        [src]="apiUrl + 'advisors/' + project.advisor.image"
-        [alt]="project.advisor.name"
-      />
-      <h2>
-        {{ project.advisor.name }}
-      </h2>
-      <span> 📞 {{ project.advisor.phone }} </span>
-      <span> ✉️ {{ project.advisor.email }} </span>
-    </div>
+    @if (project.advisor) {
+      <div class="property-detail__advisor">
+        <img
+          [src]="assetsUrl + project.advisor.image"
+          [alt]="project.advisor.name"
+        />
+        <h2>
+          {{ project.advisor.name }}
+        </h2>
+        <span> 📞 {{ project.advisor.phone }} </span>
+        <span> ✉️ {{ project.advisor.email }} </span>
+      </div>
+    }
   </div>
 </div>
 <div class="property-detail__video section">

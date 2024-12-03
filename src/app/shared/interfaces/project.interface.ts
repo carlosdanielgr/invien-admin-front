@@ -17,7 +17,8 @@ export interface Project {
   url_map: string;
   location: string;
   pdf: string;
-  advisor: Advisor;
+  advisor?: Advisor;
+  advisorId: number;
   country: Country;
   state: State;
   town: Town;
@@ -46,7 +47,7 @@ export interface OriginalData {
   location_es: string;
   location_en: string;
   pdf: string;
-  advisor: Advisor;
+  advisorId: number;
   country: Country;
   state: State;
   town: Town;
@@ -54,7 +55,7 @@ export interface OriginalData {
 }
 
 export interface Advisor {
-  id: string;
+  id: number;
   name: string;
   phone: string;
   email: string;

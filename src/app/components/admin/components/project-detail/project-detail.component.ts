@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { environment } from '@environment/environment';
 import { Project } from '@shared/interfaces/project.interface';
+import { AdvisorService } from '@shared/services/advisor.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -16,9 +17,15 @@ export class ProjectDetailComponent implements OnInit {
 
   apiUrl = `${environment.apiUrl}uploads/`;
 
-  constructor(private readonly sanitizer: DomSanitizer) {}
+  assetsUrl = environment.invienUrl;
+
+  constructor(
+    private readonly sanitizer: DomSanitizer,
+    private readonly advisorService: AdvisorService,
+  ) {}
 
   ngOnInit(): void {
+    this.getAdvisor();
     this.project = history.state;
     this.project.url_video = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.project.url_video,
@@ -26,5 +33,15 @@ export class ProjectDetailComponent implements OnInit {
     this.project.url_map = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.project.url_map,
     ) as string;
+  }
+
+  private getAdvisor() {
+    this.advisorService.getAllAdvisors().subscribe({
+      next: (advisor) => {
+        this.project.advisor = advisor.data.find(
+          (a) => a.id === +this.project.advisorId,
+        );
+      },
+    });
   }
 }
