@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -8,7 +9,7 @@ import { AdvisorService } from '@shared/services/advisor.service';
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
@@ -27,9 +28,10 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getAdvisor();
     this.project = history.state;
-    this.project.url_video = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.project.url_video,
-    ) as string;
+    if (this.project.url_video)
+      this.project.url_video = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.project.url_video,
+      ) as string;
     this.project.url_map = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.project.url_map,
     ) as string;

@@ -68,7 +68,12 @@
     </div>
     <div class="property-detail__props-price">
       <span>En Venta</span>
-      <span>$ {{ project.price }}</span>
+      <span>
+        {{
+          project.price | currency: project.currency : "symbol-narrow" : "1.2-2"
+        }}
+        {{ project.currency }}
+      </span>
     </div>
   </div>
 </article>
@@ -114,17 +119,19 @@
     }
   </div>
 </div>
-<div class="property-detail__video section">
-  <iframe
-    height="570"
-    [src]="project.url_video"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen
-  ></iframe>
-</div>
+@if (project.url_video) {
+  <div class="property-detail__video section">
+    <iframe
+      height="570"
+      [src]="project.url_video"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+}
 <div class="section">
   <iframe
     [src]="project.url_map"

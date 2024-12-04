@@ -199,7 +199,29 @@
         </ul>
       </div>
     </div>
-    <div class="manage-project__form-quant">
+    <div class="manage-project__form-quant mt-3">
+      <div class="d-flex">
+        <div class="form-floating col-8">
+          <input
+            type="number"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="price"
+          />
+          <label for="floatingInput">Precio</label>
+        </div>
+        <div class="form-floating col-4">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="currency"
+          />
+          <label for="floatingInput">Moneda</label>
+        </div>
+      </div>
       <div class="form-floating">
         <input
           type="text"
@@ -220,6 +242,8 @@
         />
         <label for="floatingInput">Tamaño total</label>
       </div>
+    </div>
+    <div class="manage-project__form-quant">
       <div class="form-floating">
         <input
           type="number"
@@ -249,16 +273,6 @@
           formControlName="garage"
         />
         <label for="floatingInput">Cant. Cochera</label>
-      </div>
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-          formControlName="price"
-        />
-        <label for="floatingInput">Precio</label>
       </div>
     </div>
     <div>
