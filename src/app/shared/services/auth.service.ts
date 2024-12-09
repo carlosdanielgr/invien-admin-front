@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@environment/environment';
 
 export interface Login {
   user: string;
@@ -10,7 +11,7 @@ export interface Login {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:3000/auth/';
+  private readonly API_URL = `${environment.apiUrl}auth/`;
 
   constructor(private readonly http: HttpClient) {}
 
