@@ -1,0 +1,1 @@
+import{Ib as e,Ob as s,R as r,W as o}from"./chunk-LDLJT7P6.js";var f=(()=>{class t{constructor(i){this.http=i,this.API_URL=`${s.invienUrl}assets/advisors.json`}getAllAdvisors(){return this.http.get(this.API_URL)}static{this.\u0275fac=function(n){return new(n||t)(o(e))}}static{this.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{f as a};
