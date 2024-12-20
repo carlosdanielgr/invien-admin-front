@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://invien-admin.onrender.com/',
-  invienUrl: 'https://carlosdanielgr.github.io/invien/es/',
+  apiUrl: 'http://167.88.42.155:3000/',
+  invienUrl: 'https://invien.mx/es/',
 };
