@@ -26,7 +26,7 @@ export class ProjectService {
   constructor(private readonly http: HttpClient) {}
 
   private getAllProjects() {
-    return this.http.get<Response<Project[]>>(`${this.API_URL}all/es`);
+    return this.http.get<Response<Project[]>>(`${this.API_URL}all`);
   }
 
   getProjectById(id: string) {
