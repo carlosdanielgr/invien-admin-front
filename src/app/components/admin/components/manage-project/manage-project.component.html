@@ -49,6 +49,31 @@
           class="form-select"
           id="floatingSelect"
           aria-label="Floating label select example"
+          formControlName="advisorId"
+        >
+          @for (item of advisors; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+        <label for="floatingSelect">Seleccionar asesor</label>
+      </div>
+      <div class="form-floating">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
+          formControlName="is_for"
+        >
+          <option value="sale">Venta</option>
+          <option value="rent">Renta</option>
+        </select>
+        <label for="floatingSelect">Es para</label>
+      </div>
+      <div class="form-floating">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
           formControlName="typeId"
         >
           @for (item of types; track $index) {
@@ -288,7 +313,7 @@
       </div>
       <div class="manage-project__steps">
         <img src="./assets/images/first-step.png" alt="first" />
-        <img src="./assets/images/second-step.png" alt="first" />
+        <img src="./assets/images/second-step.png" alt="second" />
       </div>
     </div>
     <div>
@@ -304,9 +329,10 @@
       </div>
       <div class="pt-2">
         <img src="./assets/images/map.png" alt="first" />
+        <img src="./assets/images/map-url.png" alt="second" />
       </div>
     </div>
-    <div>
+    <div class="manage-project__form__content-imgs">
       <label for="formFile" class="form-label">
         Agregar imagenes (Max 1mb)
       </label>
@@ -335,19 +361,6 @@
           <span>Aún no se agregan imágenes</span>
         }
       </div>
-    </div>
-    <div class="form-floating">
-      <select
-        class="form-select"
-        id="floatingSelect"
-        aria-label="Floating label select example"
-        formControlName="advisorId"
-      >
-        @for (item of advisors; track $index) {
-          <option [value]="item.id">{{ item.name }}</option>
-        }
-      </select>
-      <label for="floatingSelect">Seleccionar asesor</label>
     </div>
     <button
       type="button"

@@ -151,6 +151,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       location_es: ['', Validators.required],
       location_en: ['', Validators.required],
       advisorId: ['', Validators.required],
+      is_for: ['', Validators.required],
       images: [[]],
     });
   }
