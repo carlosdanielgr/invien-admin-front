@@ -69,10 +69,7 @@
     <div class="property-detail__props-price">
       <span>En Venta</span>
       <span>
-        {{
-          project.price | currency: project.currency : "symbol-narrow" : "1.2-2"
-        }}
-        {{ project.currency }}
+        {{ project.price_mxn | currency: "MXN" : "symbol-narrow" : "1.2-2" }}
       </span>
     </div>
   </div>

@@ -5,8 +5,8 @@ export interface Project {
   name: string;
   description: string;
   images: string[];
-  price: string;
-  currency: string;
+  price_usd: string;
+  price_mxn: string;
   total_size: string;
   built_size: string;
   rooms: number;
@@ -33,8 +33,8 @@ export interface OriginalData {
   description_es: string;
   description_en: string;
   images: string[];
-  price: string;
-  currency: string;
+  price_usd: string;
+  price_mxn: string;
   total_size: string;
   built_size: string;
   rooms: number;
