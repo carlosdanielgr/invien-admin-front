@@ -63,6 +63,7 @@ export interface Advisor {
   email: string;
   image: string;
   role_es: string;
+  role_en: string;
 }
 
 export interface Type {

@@ -1,5 +1,5 @@
 <section class="advisors">
-    <app-add-button />
+    <app-add-button (click)="openModal()" />
     <article class="advisors__list">
         @for (adviser of advisors; track $index) {
         <app-adviser [adviser]="adviser" />

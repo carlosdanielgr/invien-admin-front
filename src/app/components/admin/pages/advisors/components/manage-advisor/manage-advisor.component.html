@@ -1,0 +1,41 @@
+<section class="manage-advisor">
+    <h1 class="h2 text-center mb-3">{{advisor? 'Editar' : 'Agregar'}} asesor</h1>
+    <form class="manage-advisor__form" [formGroup]="form">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="name" />
+            <label for="floatingInput">Nombre</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="email" />
+            <label for="floatingInput">Correo</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="phone" />
+            <label for="floatingInput">Teléfono</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="role_es" />
+            <label for="floatingInput">Rol en español</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="role_en" />
+            <label for="floatingInput">Rol en inglés</label>
+        </div>
+        <div class="manage-project__form__content-imgs">
+            <label for="formFile" class="form-label">
+                Foto (Max 1mb)
+            </label>
+            <input class="form-control" type="file" id="formFile" accept="image/*" multiple
+                (change)="onImagesChange($event)" />
+        </div>
+        <button type="button" class="btn btn-{{advisor? 'warning' : 'success'}}" [disabled]="form.invalid"
+            (click)="onSubmit()">
+            {{advisor? 'Editar' : 'Agregar'}}
+        </button>
+    </form>
+</section>

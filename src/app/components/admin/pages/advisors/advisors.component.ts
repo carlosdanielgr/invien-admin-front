@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Advisor } from '@shared/interfaces/project.interface';
 import { AddButtonComponent } from '@shared/components/add-button/add-button.component';
 import { AdviserComponent } from './components/adviser/adviser.component';
+import { ManageAdvisorComponent } from './components/manage-advisor/manage-advisor.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-advisors',
@@ -11,54 +13,11 @@ import { AdviserComponent } from './components/adviser/adviser.component';
   styleUrl: './advisors.component.scss',
 })
 export class AdvisorsComponent {
-  advisors: Advisor[] = [
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-    {
-      id: 1,
-      name: 'John Doe',
-      role_es: 'CEO',
-      image: './assets/jorge.png',
-      phone: '1234567890',
-      email: 'test@test.com',
-    },
-  ];
+  advisors: Advisor[] = [];
+
+  constructor(private readonly modalService: NgbModal) {}
+
+  openModal() {
+    this.modalService.open(ManageAdvisorComponent);
+  }
 }
