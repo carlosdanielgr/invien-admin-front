@@ -1,0 +1,8 @@
+<section class="advisors">
+    <app-add-button />
+    <article class="advisors__list">
+        @for (adviser of advisors; track $index) {
+        <app-adviser [adviser]="adviser" />
+        }
+    </article>
+</section>

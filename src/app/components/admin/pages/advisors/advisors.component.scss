@@ -1,0 +1,15 @@
+.advisors {
+  padding: 3rem 1rem;
+  &__list {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+  &__no-data {
+    width: 100%;
+    text-align: center;
+    > p {
+      font-size: 2rem;
+    }
+  }
+}

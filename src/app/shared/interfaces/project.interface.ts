@@ -62,6 +62,7 @@ export interface Advisor {
   phone: string;
   email: string;
   image: string;
+  role_es: string;
 }
 
 export interface Type {

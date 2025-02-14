@@ -1,0 +1,25 @@
+<div class="adviser card">
+  <img class="card-img-top adviser__img" [src]="adviser.image" [alt]="adviser.name" />
+  <div class="card-body">
+    <div>
+      <span class="d-block fs-5"> {{ adviser.name }} </span>
+      <span> {{ adviser.role_es }} </span>
+    </div>
+    <div>
+      <span class="adviser__contact">
+        {{ adviser.email }}
+      </span>
+      <span class="adviser__contact">
+        {{ adviser.phone }}
+      </span>
+    </div>
+    <div class="btn-group adviser__actions">
+      <button type="button" class="btn btn-warning">
+        <img src="./assets/icons/edit.svg" alt="edit" />
+      </button>
+      <button type="button" class="btn btn-danger">
+        <img src="./assets/icons/remove.svg" alt="remove" />
+      </button>
+    </div>
+  </div>
+</div>

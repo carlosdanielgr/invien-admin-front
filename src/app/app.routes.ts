@@ -41,6 +41,13 @@ export const routes: Routes = [
             './components/admin/components/project-detail/project-detail.component'
           ).then((c) => c.ProjectDetailComponent),
       },
+      {
+        path: 'advisor',
+        loadComponent: () =>
+          import('./components/admin/pages/advisors/advisors.component').then(
+            (c) => c.AdvisorsComponent
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
