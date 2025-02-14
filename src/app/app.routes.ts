@@ -16,29 +16,29 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import(
-            './components/admin/components/projects/projects.component'
-          ).then((c) => c.ProjectsComponent),
+          import('./components/admin/pages/projects/projects.component').then(
+            (c) => c.ProjectsComponent
+          ),
       },
       {
         path: 'project-add',
         loadComponent: () =>
           import(
-            './components/admin/components/manage-project/manage-project.component'
+            './components/admin/pages/manage-project/manage-project.component'
           ).then((c) => c.ManageProjectComponent),
       },
       {
         path: 'project-edit',
         loadComponent: () =>
           import(
-            './components/admin/components/manage-project/manage-project.component'
+            './components/admin/pages/manage-project/manage-project.component'
           ).then((c) => c.ManageProjectComponent),
       },
       {
         path: 'project-detail',
         loadComponent: () =>
           import(
-            './components/admin/components/project-detail/project-detail.component'
+            './components/admin/pages/project-detail/project-detail.component'
           ).then((c) => c.ProjectDetailComponent),
       },
       {
