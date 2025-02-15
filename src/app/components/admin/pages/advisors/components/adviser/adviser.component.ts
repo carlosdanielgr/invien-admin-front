@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from '@environment/environment';
 import { Advisor } from '@shared/interfaces/project.interface';
-import { ManageAdvisorComponent } from '../manage-advisor/manage-advisor.component';
 
 @Component({
   selector: 'app-adviser',
@@ -10,13 +9,26 @@ import { ManageAdvisorComponent } from '../manage-advisor/manage-advisor.compone
   templateUrl: './adviser.component.html',
   styleUrl: './adviser.component.scss',
 })
-export class AdviserComponent {
+export class AdviserComponent implements OnInit {
   @Input() adviser!: Advisor;
 
-  constructor(private readonly modalService: NgbModal) {}
+  @Output() editAdviser = new EventEmitter<Advisor>();
+
+  @Output() deleteAdviser = new EventEmitter<string>();
+
+  advisorImage = '';
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.advisorImage = `${environment.apiUrl}uploads/advisors/${this.adviser.image}`;
+  }
+
+  onDelete() {
+    this.deleteAdviser.emit(this.adviser.id);
+  }
 
   onEdit() {
-    const modalRef = this.modalService.open(ManageAdvisorComponent);
-    modalRef.componentInstance.advisor = this.adviser;
+    this.editAdviser.emit(this.adviser);
   }
 }

@@ -1,5 +1,5 @@
 <div class="adviser card">
-  <img class="card-img-top adviser__img" [src]="adviser.image" [alt]="adviser.name" />
+  <img class="card-img-top adviser__img" [src]="advisorImage" [alt]="adviser.name" />
   <div class="card-body">
     <div>
       <span class="d-block fs-5"> {{ adviser.name }} </span>
@@ -17,7 +17,7 @@
       <button type="button" class="btn btn-warning" (click)="onEdit()">
         <img src="./assets/icons/edit.svg" alt="edit" />
       </button>
-      <button type="button" class="btn btn-danger">
+      <button type="button" class="btn btn-danger" (click)="onDelete()">
         <img src="./assets/icons/remove.svg" alt="remove" />
       </button>
     </div>

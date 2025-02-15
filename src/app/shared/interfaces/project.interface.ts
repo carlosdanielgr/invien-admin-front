@@ -19,7 +19,7 @@ export interface Project {
   location: string;
   pdf: string;
   advisor?: Advisor;
-  advisorId: number;
+  advisorId: string;
   country: Country;
   state: State;
   town: Town;
@@ -49,7 +49,7 @@ export interface OriginalData {
   location_es: string;
   location_en: string;
   pdf: string;
-  advisorId: number;
+  advisor: Advisor;
   country: Country;
   state: State;
   town: Town;
@@ -57,7 +57,7 @@ export interface OriginalData {
 }
 
 export interface Advisor {
-  id: number;
+  id: string;
   name: string;
   phone: string;
   email: string;

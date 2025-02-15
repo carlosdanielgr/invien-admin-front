@@ -5,7 +5,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { errorFn } from '@shared/functions/errors.function';
 import { Advisor } from '@shared/interfaces/project.interface';
+import { AdvisorService } from '@shared/services/advisor.service';
 
 interface AdvisorForm extends Omit<Advisor, 'id'> {}
 
@@ -28,6 +31,11 @@ export class ManageAdvisorComponent implements OnInit {
     role_en: new FormControl('', Validators.required),
   });
 
+  constructor(
+    private readonly modalService: NgbModal,
+    private readonly advisorService: AdvisorService
+  ) {}
+
   ngOnInit(): void {
     if (this.advisor) {
       this.form.patchValue(this.advisor);
@@ -39,6 +47,24 @@ export class ManageAdvisorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    if (!this.advisor) {
+      this.addAdvisor();
+    }
+  }
+
+  private addAdvisor() {
+    const body = new FormData();
+    const data = this.form.value;
+    Object.keys(data).forEach((key) => {
+      body.append(key, data[key as keyof AdvisorForm]);
+    });
+    this.advisorService.postAdvisor(body).subscribe({
+      next: () => {
+        this.modalService.dismissAll('reload');
+      },
+      error: () => {
+        errorFn('Error al crear el asesor');
+      },
+    });
   }
 }

@@ -67,7 +67,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     private readonly fb: FormBuilder,
     private readonly advisorService: AdvisorService,
     private readonly projectService: ProjectService,
-    private readonly router: Router,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +89,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       .project as OriginalData;
     this.form.patchValue({
       ...data,
+      advisorId: data.advisor?.id,
       countryId: data.country.id,
       stateId: data.state.id,
       townId: data.town.id,
@@ -97,14 +98,14 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
     amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
     this.listFiles = images.map(
-      (i: string) => `${environment.apiUrl}uploads/images/${i}`,
+      (i: string) => `${environment.apiUrl}uploads/images/${i}`
     );
   }
 
   private getAdvisors(): void {
     this.advisorService.getAllAdvisors().subscribe({
       next: (res) => {
-        this.advisors = res.data;
+        this.advisors = res;
       },
     });
   }

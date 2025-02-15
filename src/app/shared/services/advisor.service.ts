@@ -7,11 +7,19 @@ import { Advisor } from '@shared/interfaces/project.interface';
   providedIn: 'root',
 })
 export class AdvisorService {
-  private readonly API_URL = `${environment.invienUrl}assets/advisors.json`;
+  private readonly API_URL = `${environment.apiUrl}advisor/`;
 
   constructor(private readonly http: HttpClient) {}
 
   getAllAdvisors() {
-    return this.http.get<{ data: Advisor[] }>(this.API_URL);
+    return this.http.get<Advisor[]>(this.API_URL);
+  }
+
+  postAdvisor(advisor: FormData) {
+    return this.http.post<Advisor>(this.API_URL, advisor);
+  }
+
+  deleteAdvisor(id: string) {
+    return this.http.delete(`${this.API_URL}${id}`);
   }
 }

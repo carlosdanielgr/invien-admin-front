@@ -22,7 +22,7 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(
     private readonly sanitizer: DomSanitizer,
-    private readonly advisorService: AdvisorService,
+    private readonly advisorService: AdvisorService
   ) {}
 
   ngOnInit(): void {
@@ -30,18 +30,18 @@ export class ProjectDetailComponent implements OnInit {
     this.project = history.state;
     if (this.project.url_video)
       this.project.url_video = this.sanitizer.bypassSecurityTrustResourceUrl(
-        this.project.url_video,
+        this.project.url_video
       ) as string;
     this.project.url_map = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.project.url_map,
+      this.project.url_map
     ) as string;
   }
 
   private getAdvisor() {
     this.advisorService.getAllAdvisors().subscribe({
       next: (advisor) => {
-        this.project.advisor = advisor.data.find(
-          (a) => a.id === +this.project.advisorId,
+        this.project.advisor = advisor.find(
+          (a) => a.id === this.project.advisorId
         );
       },
     });
