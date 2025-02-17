@@ -1,35 +1,18 @@
 <article class="property-detail">
-  <div
-    id="carouselExampleAutoplaying2"
-    class="carousel slide"
-    data-bs-ride="carousel"
-  >
+  <div id="carouselExampleAutoplaying2" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       @for (item of project.images; track $index; let first = $first) {
-        <div class="carousel-item" [class.active]="first">
-          <img
-            class="property-detail__carousel-img"
-            [src]="apiUrl + 'images/' + item"
-            [alt]="item"
-          />
-        </div>
+      <div class="carousel-item" [class.active]="first">
+        <img class="property-detail__carousel-img" [src]="apiUrl + 'images/' + item" [alt]="item" />
+      </div>
       }
     </div>
     <div class="property-detail__carousel-btn">
-      <button
-        class="btn carousel-btn mx-2"
-        type="button"
-        data-bs-target="#carouselExampleAutoplaying2"
-        data-bs-slide="prev"
-      >
+      <button class="btn carousel-btn mx-2" type="button" data-bs-target="#carouselExampleAutoplaying2"
+        data-bs-slide="prev">
         <img src="./assets/icons/arrow-left.svg" alt="left" />
       </button>
-      <button
-        class="btn carousel-btn"
-        type="button"
-        data-bs-target="#carouselExampleAutoplaying2"
-        data-bs-slide="next"
-      >
+      <button class="btn carousel-btn" type="button" data-bs-target="#carouselExampleAutoplaying2" data-bs-slide="next">
         <img src="./assets/icons/arrow-right.svg" alt="right" />
       </button>
     </div>
@@ -37,10 +20,8 @@
   <div class="property-detail__props section">
     <div>
       <h1 class="property-detail__props-title">{{ project.name }}</h1>
-      <span class="property-detail__props-type"
-        >{{ project.location }}, {{ project.state.state_es }},
-        {{ project.town.town_es }}</span
-      >
+      <span class="property-detail__props-type">{{ project.location }}, {{ project.state.state_es }},
+        {{ project.town.town_es }}</span>
     </div>
     <div class="property-detail__props-features">
       <div>
@@ -79,64 +60,42 @@
     <div class="property-detail__description-info">
       <div>
         <h2 class="property-detail__description-title">Descripción</h2>
-        <div
-          class="property-detail__description-texts"
-          [innerHTML]="project.description"
-        ></div>
+        <div class="property-detail__description-texts" [innerHTML]="project.description"></div>
       </div>
       <div>
         <h2 class="property-detail__description-title">Detalles</h2>
-        <div
-          class="property-detail__description-texts"
-          [innerHTML]="project.details"
-        ></div>
+        <div class="property-detail__description-texts" [innerHTML]="project.details"></div>
       </div>
       <div>
         <h3 class="property-detail__description-title">Amenidades</h3>
         @for (item of project.amenities; track $index) {
-          <span class="property-detail__description-amenity">
-            <img src="./assets/icons/check-gray.svg" alt="check-gray" />
-            {{ item }}
-          </span>
+        <span class="property-detail__description-amenity">
+          <img src="./assets/icons/check-gray.svg" alt="check-gray" />
+          {{ item }}
+        </span>
         }
       </div>
     </div>
     @if (project.advisor) {
-      <div class="property-detail__advisor">
-        <img
-          [src]="assetsUrl + project.advisor.image"
-          [alt]="project.advisor.name"
-        />
-        <h2>
-          {{ project.advisor.name }}
-        </h2>
-        <span> 📞 {{ project.advisor.phone }} </span>
-        <span> ✉️ {{ project.advisor.email }} </span>
-      </div>
+    <div class="property-detail__advisor">
+      <img [src]="apiUrl + 'advisors/' + project.advisor.image" [alt]="project.advisor.name" />
+      <h2>
+        {{ project.advisor.name }}
+      </h2>
+      <span> 📞 {{ project.advisor.phone }} </span>
+      <span> ✉️ {{ project.advisor.email }} </span>
+    </div>
     }
   </div>
 </div>
 @if (project.url_video) {
-  <div class="property-detail__video section">
-    <iframe
-      height="570"
-      [src]="project.url_video"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-    ></iframe>
-  </div>
+<div class="property-detail__video section">
+  <iframe height="570" [src]="project.url_video" title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 }
 <div class="section">
-  <iframe
-    [src]="project.url_map"
-    width="100%"
-    height="450"
-    style="border: 0"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+  <iframe [src]="project.url_map" width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>

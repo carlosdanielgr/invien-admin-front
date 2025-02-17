@@ -19,6 +19,10 @@ export class AdvisorService {
     return this.http.post<Advisor>(this.API_URL, advisor);
   }
 
+  patchAdvisor(id: string, advisor: FormData) {
+    return this.http.patch<Advisor>(`${this.API_URL}${id}`, advisor);
+  }
+
   deleteAdvisor(id: string) {
     return this.http.delete(`${this.API_URL}${id}`);
   }

@@ -49,7 +49,7 @@ export class ManageAdvisorComponent implements OnInit {
   onSubmit() {
     if (!this.advisor) {
       this.addAdvisor();
-    }
+    } else this.editAdvisor();
   }
 
   private addAdvisor() {
@@ -64,6 +64,27 @@ export class ManageAdvisorComponent implements OnInit {
       },
       error: () => {
         errorFn('Error al crear el asesor');
+      },
+    });
+  }
+
+  private editAdvisor() {
+    const body = new FormData();
+    const data = this.form.value;
+    Object.keys(data).forEach((key) => {
+      if (
+        data[key as keyof AdvisorForm] !==
+        this.advisor![key as keyof AdvisorForm]
+      )
+        body.append(key, data[key as keyof AdvisorForm]);
+    });
+
+    this.advisorService.patchAdvisor(this.advisor!.id, body).subscribe({
+      next: () => {
+        this.modalService.dismissAll('reload');
+      },
+      error: () => {
+        errorFn('Error al editar el asesor');
       },
     });
   }
