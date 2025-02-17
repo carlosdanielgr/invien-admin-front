@@ -48,6 +48,13 @@ export const routes: Routes = [
             (c) => c.AdvisorsComponent
           ),
       },
+      {
+        path: 'locations',
+        loadComponent: () =>
+          import('./components/admin/pages/locations/locations.component').then(
+            (c) => c.LocationsComponent
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
