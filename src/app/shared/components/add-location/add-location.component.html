@@ -1,0 +1,19 @@
+<section class="add-location">
+    <h2 class="mb-3 text-center">{{data ? 'Editar' : 'Crear'}} {{typeNames[type] | lowercase}}</h2>
+    <form class="add-location__form" [formGroup]="form">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="name" />
+            <label for="floatingInput">Nombre del {{typeNames[type] | lowercase}}</label>
+        </div>
+        @if(type !== 'country'){
+        <app-autocomplete label="Seleccionar el país" />
+        }
+        @if(type === 'municipality'){
+        <app-autocomplete label="Seleccionar el departamento" />
+        }
+        <button type="button" class="btn btn-{{data ? 'warning' : 'success'}}">
+            {{data ? 'Editar' : 'Crear'}}
+        </button>
+    </form>
+</section>
