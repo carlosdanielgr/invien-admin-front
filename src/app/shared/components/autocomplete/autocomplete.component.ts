@@ -1,6 +1,16 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbTypeahead, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbTypeahead,
+  NgbTypeaheadModule,
+  NgbTypeaheadSelectItemEvent,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -23,6 +33,8 @@ export class AutocompleteComponent {
   @Input() label: string = 'Buscar...';
 
   @Input() data: string[] = [];
+
+  @Output() selectItem = new EventEmitter<string>();
 
   @ViewChild('instance', { static: true }) instance!: NgbTypeahead;
 
@@ -48,10 +60,19 @@ export class AutocompleteComponent {
         (term === ''
           ? this.data
           : this.data.filter(
-              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+              (v) =>
+                v
+                  .toLowerCase()
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
       )
     );
   };
+
+  onSelectItem(item: NgbTypeaheadSelectItemEvent) {
+    this.selectItem.emit(item.item);
+  }
 }

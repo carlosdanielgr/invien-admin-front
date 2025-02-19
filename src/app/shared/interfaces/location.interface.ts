@@ -6,18 +6,16 @@ export interface Locations {
 
 export interface Country {
   id: string;
-  country_es: string;
-  country_en: string;
+  name_es: string;
+  name_en: string;
 }
 
 export interface State {
   id: string;
-  state_es: string;
-  state_en: string;
+  name: string;
 }
 
 export interface Town {
   id: string;
-  town_es: string;
-  town_en: string;
+  name: string;
 }

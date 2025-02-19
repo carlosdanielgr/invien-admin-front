@@ -4,41 +4,42 @@
             <button type="button" class="btn btn-success" (click)="openModal('country')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning" [disabled]="!states.length">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" [disabled]="!states.length">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>
-        <app-autocomplete label="Países" />
+        <app-autocomplete label="País" [data]="countryNames" (selectItem)="getStateByCountry($event)" />
     </div>
     <div>
         <div class="btn-group locations__actions">
-            <button type="button" class="btn btn-success" (click)="openModal('department')">
+            <button type="button" class="btn btn-success" [disabled]="!states.length" (click)="openModal('department')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning" [disabled]="!towns.length">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" [disabled]="!towns.length">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>
-        <app-autocomplete label="Departamento" />
+        <app-autocomplete label="Departamento" [data]="stateNames" (selectItem)="getTownByState($event)" />
     </div>
     <div>
         <div class="btn-group locations__actions">
-            <button type="button" class="btn btn-success" (click)="openModal('municipality')">
+            <button type="button" class="btn btn-success" [disabled]="!towns.length"
+                (click)="openModal('municipality')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning" [disabled]="!currentFilter.town">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.town">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>
-        <app-autocomplete label="Municipio" />
+        <app-autocomplete label="Municipio" [data]="townNames" />
     </div>
 </section>
