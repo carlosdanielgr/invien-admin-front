@@ -80,8 +80,14 @@ export class LocationsComponent implements OnInit {
     }
   }
 
-  openModal(type: TypeLocation, data?: any): void {
+  openModal(type: TypeLocation, isEdit?: boolean): void {
     const modalRef = this.modalService.open(AddLocationComponent);
     modalRef.componentInstance.type = type;
+    if (isEdit) modalRef.componentInstance.values = this.currentFilter;
+    modalRef.dismissed.subscribe({
+      next: (msg) => {
+        if (msg === 'reloadCountry') this.getCountries();
+      },
+    });
   }
 }

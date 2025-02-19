@@ -4,10 +4,11 @@
             <button type="button" class="btn btn-success" (click)="openModal('country')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning" [disabled]="!states.length">
+            <button type="button" class="btn btn-warning" [disabled]="!currentFilter.country"
+                (click)="openModal('country', true)">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger" [disabled]="!states.length">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.country">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>

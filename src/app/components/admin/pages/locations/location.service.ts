@@ -15,6 +15,18 @@ export class LocationService {
     return this.http.get<Country[]>(`${this.API_URL}countries`);
   }
 
+  postCountry(country: Country) {
+    return this.http.post(`${this.API_URL}country`, country);
+  }
+
+  patchCountry(country: Country, countryId: string) {
+    return this.http.patch(`${this.API_URL}country/${countryId}`, country);
+  }
+
+  deleteCountry(countryId: string) {
+    return this.http.delete(`${this.API_URL}country/${countryId}`);
+  }
+
   getStates(countryId: string) {
     return this.http.get<State[]>(`${this.API_URL}states`, {
       params: { countryId },
