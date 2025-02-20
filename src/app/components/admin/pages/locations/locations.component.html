@@ -8,7 +8,8 @@
                 (click)="openModal('country', true)">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.country">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.country"
+                (click)="deleteCountry(currentFilter.country)">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>

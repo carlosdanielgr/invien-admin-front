@@ -7,6 +7,11 @@ import {
 import { AutocompleteComponent } from '@shared/components/autocomplete/autocomplete.component';
 import { LocationService } from './location.service';
 import { Country, State, Town } from '@shared/interfaces/location.interface';
+import {
+  confirmAlertLoading,
+  successAlert,
+} from '@shared/functions/confirm-alert.function';
+import { errorFn } from '@shared/functions/errors.function';
 
 @Component({
   selector: 'app-locations',
@@ -78,6 +83,24 @@ export class LocationsComponent implements OnInit {
         },
       });
     }
+  }
+
+  deleteCountry(country: Country): void {
+    const request = () =>
+      this.locationService.deleteCountry(country.id).subscribe({
+        next: () => {
+          this.getCountries();
+          this.currentFilter.country = null;
+          successAlert('País eliminado');
+        },
+        error: () => {
+          errorFn('Error al eliminar el país');
+        },
+      });
+    confirmAlertLoading(
+      `El país ${country.name_es} será eliminado,  ¿deseas continuar?`,
+      request
+    );
   }
 
   openModal(type: TypeLocation, isEdit?: boolean): void {
