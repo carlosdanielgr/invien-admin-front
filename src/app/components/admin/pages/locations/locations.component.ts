@@ -85,6 +85,10 @@ export class LocationsComponent implements OnInit {
     }
   }
 
+  setTown(town: string): void {
+    this.currentFilter.town = this.towns.find((t) => t.name === town);
+  }
+
   deleteCountry(): void {
     const request = () =>
       this.locationService
@@ -93,6 +97,8 @@ export class LocationsComponent implements OnInit {
           next: () => {
             this.getCountries();
             this.currentFilter.country = null;
+            this.currentFilter.state = null;
+            this.currentFilter.town = null;
             successAlert('País eliminado');
           },
           error: () => {
@@ -111,6 +117,7 @@ export class LocationsComponent implements OnInit {
         next: () => {
           this.getStateByCountry(this.currentFilter.country.name_es);
           this.currentFilter.state = null;
+          this.currentFilter.town = null;
           successAlert('Departamento eliminado');
         },
         error: () => {
@@ -119,6 +126,24 @@ export class LocationsComponent implements OnInit {
       });
     confirmAlertLoading(
       `El departamento ${this.currentFilter.state.name} será eliminado,  ¿deseas continuar?`,
+      request
+    );
+  }
+
+  deleteTown(): void {
+    const request = () =>
+      this.locationService.deleteTown(this.currentFilter.town.id).subscribe({
+        next: () => {
+          this.getTownByState(this.currentFilter.state.name);
+          this.currentFilter.town = null;
+          successAlert('Municipio eliminado');
+        },
+        error: () => {
+          errorFn('Error al eliminar el municipio');
+        },
+      });
+    confirmAlertLoading(
+      `El municipio ${this.currentFilter.town.name} será eliminado,  ¿deseas continuar?`,
       request
     );
   }
@@ -135,6 +160,8 @@ export class LocationsComponent implements OnInit {
         if (msg === 'reloadCountry') this.getCountries();
         if (msg === 'reloadState')
           this.getStateByCountry(this.currentFilter.country.name_es);
+        if (msg === 'reloadTown')
+          this.getTownByState(this.currentFilter.state.name);
       },
     });
   }

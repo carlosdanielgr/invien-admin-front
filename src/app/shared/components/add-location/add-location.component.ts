@@ -85,6 +85,9 @@ export class AddLocationComponent implements OnInit {
     } else if (this.type.name === 'department') {
       if (!this.type.isEdit) this.postState();
       else this.patchState();
+    } else {
+      if (!this.type.isEdit) this.addTown();
+      else this.patchTown();
     }
   }
 
@@ -132,6 +135,30 @@ export class AddLocationComponent implements OnInit {
         },
         error: () => {
           errorFn('Error al editar el departamento');
+        },
+      });
+  }
+
+  private addTown() {
+    this.locationService.postTown(this.form.value).subscribe({
+      next: () => {
+        this.modalService.dismissAll('reloadTown');
+      },
+      error: () => {
+        errorFn('Error al agregar el municipio');
+      },
+    });
+  }
+
+  private patchTown() {
+    this.locationService
+      .patchTown(this.form.value, this.values['town']['id'])
+      .subscribe({
+        next: () => {
+          this.modalService.dismissAll('reloadTown');
+        },
+        error: () => {
+          errorFn('Error al editar el municipio');
         },
       });
   }

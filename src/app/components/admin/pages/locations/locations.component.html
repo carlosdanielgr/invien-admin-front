@@ -32,17 +32,18 @@
     </div>
     <div>
         <div class="btn-group locations__actions">
-            <button type="button" class="btn btn-success" [disabled]="!towns.length"
+            <button type="button" class="btn btn-success" [disabled]="!currentFilter.state"
                 (click)="openModal('municipality')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning" [disabled]="!currentFilter.town">
+            <button type="button" class="btn btn-warning" [disabled]="!currentFilter.town"
+                (click)="openModal('municipality', true)">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.town">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.town" (click)="deleteTown()">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>
-        <app-autocomplete label="Municipio" [data]="townNames" />
+        <app-autocomplete label="Municipio" [data]="townNames" (selectItem)="setTown($event)" />
     </div>
 </section>

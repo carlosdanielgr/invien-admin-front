@@ -22,7 +22,7 @@
         <app-autocomplete label="Seleccionar el país" [value]="values.country.name_es" />
         }
         @if(type.name === 'municipality'){
-        <app-autocomplete label="Seleccionar el departamento" />
+        <app-autocomplete label="Seleccionar el departamento" [value]="values.state.name" />
         }
         <button type="button" class="btn btn-{{type.isEdit ? 'warning' : 'success'}}" [disabled]="form.invalid"
             (click)="onSubmit()">
