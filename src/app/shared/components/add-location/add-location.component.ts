@@ -6,10 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
-import { LocationService } from 'src/app/components/admin/pages/locations/location.service';
+import { LocationService } from '@shared/services/location.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { errorFn } from '@shared/functions/errors.function';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 
 export type TypeLocation = 'country' | 'department' | 'municipality';
 

@@ -52,7 +52,7 @@
       </div>
       <div class="form-floating">
         <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="countryId">
+          formControlName="countryId" (change)="getStatesByCountry()">
           @for (item of locations.countries; track $index) {
           <option [value]="item.id">{{ item.name_es }}</option>
           }
@@ -61,7 +61,7 @@
       </div>
       <div class="form-floating">
         <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="stateId">
+          formControlName="stateId" (change)="getTownsByState()">
           @for (item of locations.states; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }

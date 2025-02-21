@@ -9,7 +9,6 @@ import {
   Project,
   Type,
 } from '@shared/interfaces/project.interface';
-import { Locations } from '@shared/interfaces/location.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,10 +38,6 @@ export class ProjectService {
 
   patchUpdateProject(project: FormData, id: string) {
     return this.http.patch(`${this.API_URL}update/${id}`, project);
-  }
-
-  getLocations() {
-    return this.http.get<Locations>(`${environment.apiUrl}location`);
   }
 
   getTypes() {

@@ -1,4 +1,5 @@
 <article class="projects">
+  <app-add-button routerLink="project-add" />
   @for (project of projectsService.projects; track $index) {
   <app-project-card [project]="project" />
   }

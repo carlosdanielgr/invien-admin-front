@@ -4,8 +4,8 @@ import {
   AddLocationComponent,
   TypeLocation,
 } from '@shared/components/add-location/add-location.component';
+import { LocationService } from '@shared/services/location.service';
 import { AutocompleteComponent } from '@shared/components/autocomplete/autocomplete.component';
-import { LocationService } from './location.service';
 import { Country, State, Town } from '@shared/interfaces/location.interface';
 import {
   confirmAlertLoading,

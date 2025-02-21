@@ -20,6 +20,7 @@ import {
 import { ProjectService } from '@shared/services/project.service';
 import { errorFn } from '@shared/functions/errors.function';
 import { Locations } from '@shared/interfaces/location.interface';
+import { LocationService } from '@shared/services/location.service';
 
 @Component({
   selector: 'app-manage-project',
@@ -67,6 +68,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     private readonly fb: FormBuilder,
     private readonly advisorService: AdvisorService,
     private readonly projectService: ProjectService,
+    private readonly locationService: LocationService,
     private readonly router: Router
   ) {}
 
@@ -95,6 +97,8 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       townId: data.town.id,
       typeId: data.type.id,
     });
+    this.getStatesByCountry();
+    this.getTownsByState();
     amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
     amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
     this.listFiles = images.map(
@@ -111,9 +115,30 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
   }
 
   private getLocations(): void {
-    this.projectService.getLocations().subscribe({
+    this.locationService.getCountries().subscribe({
       next: (res) => {
-        this.locations = res;
+        this.locations.countries = res;
+      },
+    });
+  }
+
+  getStatesByCountry(): void {
+    const countryId = this.form.get('countryId')?.value;
+    this.locations.states = [];
+    this.locations.towns = [];
+    this.locationService.getStates(countryId).subscribe({
+      next: (res) => {
+        this.locations.states = res;
+      },
+    });
+  }
+
+  getTownsByState(): void {
+    const stateId = this.form.get('stateId')?.value;
+    this.locations.towns = [];
+    this.locationService.getTowns(stateId).subscribe({
+      next: (res) => {
+        this.locations.towns = res;
       },
     });
   }
