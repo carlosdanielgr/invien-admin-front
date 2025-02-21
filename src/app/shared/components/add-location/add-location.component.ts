@@ -21,14 +21,12 @@ export type TypeLocation = 'country' | 'department' | 'municipality';
   styleUrl: './add-location.component.scss',
 })
 export class AddLocationComponent implements OnInit {
-  @Input() type: TypeLocation = 'country';
+  @Input() type: { name: TypeLocation; isEdit: boolean } = {
+    name: 'country',
+    isEdit: false,
+  };
 
   @Input() values: any = null;
-
-  @Input() data = {
-    countries: [],
-    states: [],
-  };
 
   form!: FormGroup;
 
@@ -49,12 +47,16 @@ export class AddLocationComponent implements OnInit {
   }
 
   private handleValues() {
-    if (this.values)
-      if (this.type === 'country') this.form.patchValue(this.values['country']);
+    if (this.type.isEdit) {
+      if (this.type.name === 'country')
+        this.form.patchValue(this.values['country']);
+      else if (this.type.name === 'department')
+        this.form.patchValue(this.values['state']);
+    }
   }
 
   private formInit() {
-    if (this.type === 'country')
+    if (this.type.name === 'country')
       this.form = new FormGroup({
         name_es: new FormControl('', [Validators.required]),
         name_en: new FormControl('', [Validators.required]),
@@ -63,12 +65,26 @@ export class AddLocationComponent implements OnInit {
       this.form = new FormGroup({
         name: new FormControl('', [Validators.required]),
       });
+    if (this.type.name === 'department') {
+      this.form.addControl(
+        'countryId',
+        new FormControl(this.values.country.id, [Validators.required])
+      );
+    } else if (this.type.name === 'municipality') {
+      this.form.addControl(
+        'stateId',
+        new FormControl(this.values.state.id, [Validators.required])
+      );
+    }
   }
 
   onSubmit() {
-    if (this.type === 'country') {
-      if (!this.values) this.addCountry();
+    if (this.type.name === 'country') {
+      if (!this.type.isEdit) this.addCountry();
       else this.editCountry();
+    } else if (this.type.name === 'department') {
+      if (!this.type.isEdit) this.postState();
+      else this.patchState();
     }
   }
 
@@ -92,6 +108,30 @@ export class AddLocationComponent implements OnInit {
         },
         error: () => {
           errorFn('Error al editar el país');
+        },
+      });
+  }
+
+  private postState() {
+    this.locationService.postState(this.form.value).subscribe({
+      next: () => {
+        this.modalService.dismissAll('reloadState');
+      },
+      error: () => {
+        errorFn('Error al agregar el departamento');
+      },
+    });
+  }
+
+  private patchState() {
+    this.locationService
+      .patchState(this.form.value, this.values['state']['id'])
+      .subscribe({
+        next: () => {
+          this.modalService.dismissAll('reloadState');
+        },
+        error: () => {
+          errorFn('Error al editar el departamento');
         },
       });
   }

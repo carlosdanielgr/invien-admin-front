@@ -8,8 +8,7 @@
                 (click)="openModal('country', true)">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.country"
-                (click)="deleteCountry(currentFilter.country)">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.country" (click)="deleteCountry()">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>
@@ -17,13 +16,15 @@
     </div>
     <div>
         <div class="btn-group locations__actions">
-            <button type="button" class="btn btn-success" [disabled]="!states.length" (click)="openModal('department')">
+            <button type="button" class="btn btn-success" [disabled]="!currentFilter.country"
+                (click)="openModal('department')">
                 <img src="./assets/icons/add.svg" alt="add" />
             </button>
-            <button type="button" class="btn btn-warning" [disabled]="!towns.length">
+            <button type="button" class="btn btn-warning" [disabled]="!currentFilter.state"
+                (click)="openModal('department', true)">
                 <img src="./assets/icons/edit.svg" alt="edit" />
             </button>
-            <button type="button" class="btn btn-danger" [disabled]="!towns.length">
+            <button type="button" class="btn btn-danger" [disabled]="!currentFilter.state" (click)="deleteState()">
                 <img src="./assets/icons/remove.svg" alt="remove" />
             </button>
         </div>

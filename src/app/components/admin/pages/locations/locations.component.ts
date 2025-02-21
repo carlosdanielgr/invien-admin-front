@@ -85,31 +85,56 @@ export class LocationsComponent implements OnInit {
     }
   }
 
-  deleteCountry(country: Country): void {
+  deleteCountry(): void {
     const request = () =>
-      this.locationService.deleteCountry(country.id).subscribe({
-        next: () => {
-          this.getCountries();
-          this.currentFilter.country = null;
-          successAlert('País eliminado');
-        },
-        error: () => {
-          errorFn('Error al eliminar el país');
-        },
-      });
+      this.locationService
+        .deleteCountry(this.currentFilter.country.id)
+        .subscribe({
+          next: () => {
+            this.getCountries();
+            this.currentFilter.country = null;
+            successAlert('País eliminado');
+          },
+          error: () => {
+            errorFn('Error al eliminar el país');
+          },
+        });
     confirmAlertLoading(
-      `El país ${country.name_es} será eliminado,  ¿deseas continuar?`,
+      `El país ${this.currentFilter.country.name_es} será eliminado,  ¿deseas continuar?`,
       request
     );
   }
 
-  openModal(type: TypeLocation, isEdit?: boolean): void {
+  deleteState(): void {
+    const request = () =>
+      this.locationService.deleteState(this.currentFilter.state.id).subscribe({
+        next: () => {
+          this.getStateByCountry(this.currentFilter.country.name_es);
+          this.currentFilter.state = null;
+          successAlert('Departamento eliminado');
+        },
+        error: () => {
+          errorFn('Error al eliminar el departamento');
+        },
+      });
+    confirmAlertLoading(
+      `El departamento ${this.currentFilter.state.name} será eliminado,  ¿deseas continuar?`,
+      request
+    );
+  }
+
+  openModal(name: TypeLocation, isEdit?: boolean): void {
     const modalRef = this.modalService.open(AddLocationComponent);
-    modalRef.componentInstance.type = type;
-    if (isEdit) modalRef.componentInstance.values = this.currentFilter;
+    modalRef.componentInstance.type = {
+      name,
+      isEdit,
+    };
+    modalRef.componentInstance.values = this.currentFilter;
     modalRef.dismissed.subscribe({
       next: (msg) => {
         if (msg === 'reloadCountry') this.getCountries();
+        if (msg === 'reloadState')
+          this.getStateByCountry(this.currentFilter.country.name_es);
       },
     });
   }

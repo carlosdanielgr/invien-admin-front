@@ -33,6 +33,18 @@ export class LocationService {
     });
   }
 
+  postState(state: State) {
+    return this.http.post(`${this.API_URL}state`, state);
+  }
+
+  patchState(state: State, stateId: string) {
+    return this.http.patch(`${this.API_URL}state/${stateId}`, state);
+  }
+
+  deleteState(stateId: string) {
+    return this.http.delete(`${this.API_URL}state/${stateId}`);
+  }
+
   getTowns(stateId: string) {
     return this.http.get<State[]>(`${this.API_URL}towns`, {
       params: { stateId },

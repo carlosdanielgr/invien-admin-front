@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -29,8 +30,10 @@ import {
   templateUrl: './autocomplete.component.html',
   styleUrl: './autocomplete.component.scss',
 })
-export class AutocompleteComponent {
+export class AutocompleteComponent implements OnInit {
   @Input() label: string = 'Buscar...';
+
+  @Input() value: string = '';
 
   @Input() data: string[] = [];
 
@@ -42,6 +45,10 @@ export class AutocompleteComponent {
   click$ = new Subject<string>();
 
   model: string = '';
+
+  ngOnInit(): void {
+    this.model = this.value;
+  }
 
   search: OperatorFunction<string, readonly string[]> = (
     text$: Observable<string>

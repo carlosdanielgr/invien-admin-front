@@ -1,7 +1,7 @@
 <section class="add-location">
-    <h2 class="mb-3 text-center">{{values ? 'Editar' : 'Crear'}} {{typeNames[type] | lowercase}}</h2>
+    <h2 class="mb-3 text-center">{{type.isEdit ? 'Editar' : 'Crear'}} {{typeNames[type.name] | lowercase}}</h2>
     <form class="add-location__form" [formGroup]="form">
-        @if(type === 'country'){
+        @if(type.name === 'country'){
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
                 formControlName="name_es" />
@@ -17,16 +17,16 @@
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
                 formControlName="name" />
-            <label for="floatingInput">Nombre del {{typeNames[type] | lowercase}}</label>
+            <label for="floatingInput">Nombre del {{typeNames[type.name] | lowercase}}</label>
         </div>
-        <app-autocomplete label="Seleccionar el país" [data]="data.countries" />
+        <app-autocomplete label="Seleccionar el país" [value]="values.country.name_es" />
         }
-        @if(type === 'municipality'){
-        <app-autocomplete label="Seleccionar el departamento" [data]="data.states" />
+        @if(type.name === 'municipality'){
+        <app-autocomplete label="Seleccionar el departamento" />
         }
-        <button type="button" class="btn btn-{{values ? 'warning' : 'success'}}" [disabled]="form.invalid"
+        <button type="button" class="btn btn-{{type.isEdit ? 'warning' : 'success'}}" [disabled]="form.invalid"
             (click)="onSubmit()">
-            {{values ? 'Editar' : 'Crear'}}
+            {{type.isEdit ? 'Editar' : 'Crear'}}
         </button>
     </form>
 </section>
