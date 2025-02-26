@@ -24,6 +24,7 @@ export interface Project {
   state: State;
   town: Town;
   type: Type;
+  is_for: string;
 }
 
 export interface OriginalData {

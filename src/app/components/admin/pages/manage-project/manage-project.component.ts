@@ -92,10 +92,10 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       ...data,
       advisorId: data.advisor?.id,
-      countryId: data.country.id,
-      stateId: data.state.id,
-      townId: data.town.id,
-      typeId: data.type.id,
+      countryId: data.country?.id,
+      stateId: data.state?.id,
+      townId: data.town?.id,
+      typeId: data.type?.id,
     });
     this.getStatesByCountry();
     this.getTownsByState();
