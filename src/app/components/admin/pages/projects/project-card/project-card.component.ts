@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '@environment/environment';
 
 import {
   confirmAlertLoading,
@@ -18,6 +19,8 @@ import { ProjectService } from '@shared/services/project.service';
 })
 export class ProjectCardComponent {
   @Input() project: Partial<Project> = {};
+
+  rootImages = `${environment.apiUrl}uploads/images/`;
 
   constructor(
     private readonly router: Router,

@@ -11,20 +11,16 @@
     font-weight: 600;
     padding-bottom: 1rem;
   }
-  &__desc {
-    max-height: 150px;
-    overflow: hidden;
-    > p:first-child {
-      font-size: 0.8rem;
+  &__img {
+    aspect-ratio: 16/9;
+    > img {
+      object-fit: cover;
+      max-height: 230px;
     }
   }
-  &__actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding-top: 1rem;
-    > button {
-      padding: 0.2rem 1rem;
+  .btn-group {
+    img {
+      height: 1.2rem;
     }
   }
 }
