@@ -11,12 +11,7 @@ import { Router } from '@angular/router';
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
 
 import { environment } from '@environment/environment';
-import { AdvisorService } from '@shared/services/advisor.service';
-import {
-  Advisor,
-  OriginalData,
-  Type,
-} from '@shared/interfaces/project.interface';
+import { OriginalData } from '@shared/interfaces/project.interface';
 import { ProjectService } from '@shared/services/project.service';
 import { errorFn } from '@shared/functions/errors.function';
 import { Locations } from '@shared/interfaces/location.interface';
@@ -32,10 +27,6 @@ import { LocationService } from '@shared/services/location.service';
 export class ManageProjectComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
-  advisors: Advisor[] = [];
-
-  types: Type[] = [];
-
   locations: Locations = {
     countries: [],
     states: [],
@@ -48,7 +39,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
 
   project: Partial<OriginalData> = {};
 
-  editor: Editor[] = [new Editor(), new Editor(), new Editor(), new Editor()];
+  editor: Editor[] = [new Editor(), new Editor()];
 
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -66,7 +57,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly advisorService: AdvisorService,
     private readonly projectService: ProjectService,
     private readonly locationService: LocationService,
     private readonly router: Router
@@ -74,9 +64,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formInit();
-    this.getAdvisors();
     this.getLocations();
-    this.getTypes();
     this.isEdit = this.router.url === '/admin/project-edit';
     if (this.isEdit) this.editProject();
   }
@@ -91,11 +79,9 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       .project as OriginalData;
     this.form.patchValue({
       ...data,
-      advisorId: data.advisor?.id,
       countryId: data.country?.id,
       stateId: data.state?.id,
       townId: data.town?.id,
-      typeId: data.type?.id,
     });
     this.getStatesByCountry();
     this.getTownsByState();
@@ -104,14 +90,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     this.listFiles = images.map(
       (i: string) => `${environment.apiUrl}uploads/images/${i}`
     );
-  }
-
-  private getAdvisors(): void {
-    this.advisorService.getAllAdvisors().subscribe({
-      next: (res) => {
-        this.advisors = res;
-      },
-    });
   }
 
   private getLocations(): void {
@@ -143,14 +121,6 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getTypes(): void {
-    this.projectService.getTypes().subscribe({
-      next: (res) => {
-        this.types = res;
-      },
-    });
-  }
-
   private formInit(): void {
     this.form = this.fb.group({
       name_es: ['', Validators.required],
@@ -158,26 +128,16 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
       countryId: ['', Validators.required],
       stateId: ['', Validators.required],
       townId: ['', Validators.required],
-      typeId: ['', Validators.required],
       description_es: ['', Validators.required],
       description_en: ['', Validators.required],
       price_mxn: ['', Validators.required],
       price_usd: ['', Validators.required],
-      built_size: ['', Validators.required],
-      total_size: ['', Validators.required],
-      rooms: ['', Validators.required],
-      bathrooms: ['', Validators.required],
-      garage: ['', Validators.required],
-      details_es: ['', Validators.required],
-      details_en: ['', Validators.required],
       amenities_es: this.fb.array([], Validators.required),
       amenities_en: this.fb.array([], Validators.required),
       url_video: [''],
       url_map: ['', Validators.required],
       location_es: ['', Validators.required],
       location_en: ['', Validators.required],
-      advisorId: ['', Validators.required],
-      is_for: ['', Validators.required],
       images: [[]],
     });
   }
@@ -237,17 +197,8 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     const data: any = {};
     const { images, amenities_en, amenities_es, ...form } = this.form.value;
     Object.keys(form).forEach((key) => {
-      if (
-        key === 'countryId' ||
-        key === 'stateId' ||
-        key === 'townId' ||
-        key === 'typeId'
-      ) {
-        const keyLocation = key.slice(0, -2) as
-          | 'country'
-          | 'state'
-          | 'town'
-          | 'type';
+      if (key === 'countryId' || key === 'stateId' || key === 'townId') {
+        const keyLocation = key.slice(0, -2) as 'country' | 'state' | 'town';
         if (form[key] !== this.project[keyLocation]?.id) data[key] = form[key];
       } else if (form[key] !== this.project[key as keyof OriginalData])
         data[key] = form[key];

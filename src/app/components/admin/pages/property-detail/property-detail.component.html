@@ -42,8 +42,32 @@
         {{ project.town.name }}</span
       >
     </div>
+    <div class="property-detail__props-features">
+      <div>
+        <img src="./assets/icons/measures.svg" alt="measures" />
+        <span>{{ project.total_size }} m2</span>
+        <span>Terreno</span>
+      </div>
+      <div>
+        <img src="./assets/icons/measures.svg" alt="measures" />
+        <span>{{ project.built_size }} m2</span>
+        <span>Construccion</span>
+      </div>
+      <div>
+        <img src="./assets/icons/room.svg" alt="room" />
+        <span>{{ project.rooms }} Habitaciones</span>
+      </div>
+      <div>
+        <img src="./assets/icons/bathroom.svg" alt="bathroom" />
+        <span>{{ project.bathrooms }} Baños</span>
+      </div>
+      <div>
+        <img src="./assets/icons/garage.svg" alt="garage" />
+        <span>{{ project.garage }} Cochera</span>
+      </div>
+    </div>
     <div class="property-detail__props-price">
-      <span>Precio desde</span>
+      <span>En Venta</span>
       <span>
         {{ project.price_mxn | currency : "MXN" : "symbol-narrow" : "1.2-2" }}
       </span>
@@ -61,6 +85,13 @@
         ></div>
       </div>
       <div>
+        <h2 class="property-detail__description-title">Detalles</h2>
+        <div
+          class="property-detail__description-texts"
+          [innerHTML]="project.details"
+        ></div>
+      </div>
+      <div>
         <h3 class="property-detail__description-title">Amenidades</h3>
         @for (item of project.amenities; track $index) {
         <span class="property-detail__description-amenity">
@@ -70,6 +101,19 @@
         }
       </div>
     </div>
+    @if (project.advisor) {
+    <div class="property-detail__advisor">
+      <img
+        [src]="apiUrl + 'advisors/' + project.advisor.image"
+        [alt]="project.advisor.name"
+      />
+      <h2>
+        {{ project.advisor.name }}
+      </h2>
+      <span> 📞 {{ project.advisor.phone }} </span>
+      <span> ✉️ {{ project.advisor.email }} </span>
+    </div>
+    }
   </div>
 </div>
 @if (project.url_video) {

@@ -5,54 +5,53 @@
       <span>Texto en español</span>
       <span>Texto en inglés</span>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="name_es" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="name_es"
+        />
         <label for="floatingInput">Nombre en español</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="name_en" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="name_en"
+        />
         <label for="floatingInput">Nombre en inglés</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="location_es" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="location_es"
+        />
         <label for="floatingInput">Ubicación en español</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="location_en" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="location_en"
+        />
         <label for="floatingInput">Ubicación en inglés</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="advisorId">
-          @for (item of advisors; track $index) {
-          <option [value]="item.id">{{ item.name }}</option>
-          }
-        </select>
-        <label for="floatingSelect">Seleccionar asesor</label>
-      </div>
-      <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="is_for">
-          <option value="sale">Venta</option>
-          <option value="rent">Renta</option>
-        </select>
-        <label for="floatingSelect">Es para</label>
-      </div>
-      <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="typeId">
-          @for (item of types; track $index) {
-          <option [value]="item.id">{{ item.type_es }}</option>
-          }
-        </select>
-        <label for="floatingSelect">Seleccionar el tipo</label>
-      </div>
-      <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="countryId" (change)="getStatesByCountry()">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
+          formControlName="countryId"
+          (change)="getStatesByCountry()"
+        >
           @for (item of locations.countries; track $index) {
           <option [value]="item.id">{{ item.name_es }}</option>
           }
@@ -60,8 +59,13 @@
         <label for="floatingSelect">Seleccionar el país</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="stateId" (change)="getTownsByState()">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
+          formControlName="stateId"
+          (change)="getTownsByState()"
+        >
           @for (item of locations.states; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
@@ -69,59 +73,60 @@
         <label for="floatingSelect">Seleccionar el departamento</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-          formControlName="townId">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
+          formControlName="townId"
+        >
           @for (item of locations.towns; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
         </select>
         <label for="floatingSelect">Seleccionar el municipio</label>
       </div>
+      <div></div>
       <div>
         <label class="mb-2">Descripción en español</label>
-        <ngx-editor-menu [editor]="editor[2]" [toolbar]="toolbar">
+        <ngx-editor-menu [editor]="editor[0]" [toolbar]="toolbar">
         </ngx-editor-menu>
-        <ngx-editor [editor]="editor[2]" formControlName="description_es">
+        <ngx-editor [editor]="editor[0]" formControlName="description_es">
         </ngx-editor>
       </div>
       <div>
         <label class="mb-2">Descripción en inglés</label>
-        <ngx-editor-menu [editor]="editor[3]" [toolbar]="toolbar">
-        </ngx-editor-menu>
-        <ngx-editor [editor]="editor[3]" formControlName="description_en">
-        </ngx-editor>
-      </div>
-      <div>
-        <label class="mb-2">Detalles en español</label>
-        <ngx-editor-menu [editor]="editor[0]" [toolbar]="toolbar">
-        </ngx-editor-menu>
-        <ngx-editor [editor]="editor[0]" formControlName="details_es">
-        </ngx-editor>
-      </div>
-      <div>
-        <label class="mb-2">Detalles en inglés</label>
         <ngx-editor-menu [editor]="editor[1]" [toolbar]="toolbar">
         </ngx-editor-menu>
-        <ngx-editor [editor]="editor[1]" formControlName="details_en">
+        <ngx-editor [editor]="editor[1]" formControlName="description_en">
         </ngx-editor>
       </div>
       <div>
         <div class="input-group mb-3">
-          <input #amenityEs type="text" class="form-control" placeholder="Amenidad en español" />
-          <button class="btn btn-success" type="button" (click)="addAmenity('es', amenityEs)">
+          <input
+            #amenityEs
+            type="text"
+            class="form-control"
+            placeholder="Amenidad en español"
+          />
+          <button
+            class="btn btn-success"
+            type="button"
+            (click)="addAmenity('es', amenityEs)"
+          >
             <img src="./assets/icons/add.svg" alt="add" />
           </button>
         </div>
         <ul class="list-group">
-          @for (
-          item of amenitiesEs.controls;
-          track item.value;
-          let index = $index
-          ) {
+          @for ( item of amenitiesEs.controls; track item.value; let index =
+          $index ) {
           <li class="list-group-item">
             <div class="manage-project__form-amenity">
               <span>{{ item.value }}</span>
-              <button type="button" class="btn btn-danger" (click)="removeAmenity('es', index)">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="removeAmenity('es', index)"
+              >
                 <img src="./assets/icons/remove.svg" alt="remove" />
               </button>
             </div>
@@ -131,21 +136,31 @@
       </div>
       <div>
         <div class="input-group mb-3">
-          <input #amenityEn type="text" class="form-control" placeholder="Amenidad en inglés" />
-          <button class="btn btn-success" type="button" (click)="addAmenity('en', amenityEn)">
+          <input
+            #amenityEn
+            type="text"
+            class="form-control"
+            placeholder="Amenidad en inglés"
+          />
+          <button
+            class="btn btn-success"
+            type="button"
+            (click)="addAmenity('en', amenityEn)"
+          >
             <img src="./assets/icons/add.svg" alt="add" />
           </button>
         </div>
         <ul class="list-group">
-          @for (
-          item of amenitiesEn.controls;
-          track item.value;
-          let index = $index
-          ) {
+          @for ( item of amenitiesEn.controls; track item.value; let index =
+          $index ) {
           <li class="list-group-item">
             <div class="manage-project__form-amenity">
               <span>{{ item.value }}</span>
-              <button type="button" class="btn btn-danger" (click)="removeAmenity('en', index)">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="removeAmenity('en', index)"
+              >
                 <img src="./assets/icons/remove.svg" alt="remove" />
               </button>
             </div>
@@ -155,50 +170,38 @@
       </div>
     </div>
     <div class="manage-project__form-quant mt-3">
-      <div class="d-flex">
+      <div class="input-group">
         <div class="form-floating col-6">
-          <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com"
-            formControlName="price_mxn" />
+          <input
+            type="number"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="price_mxn"
+          />
           <label for="floatingInput">Precio en MXN</label>
         </div>
         <div class="form-floating col-6">
-          <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com"
-            formControlName="price_usd" />
+          <input
+            type="number"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="price_usd"
+          />
           <label for="floatingInput">Precio en USD</label>
         </div>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="built_size" />
-        <label for="floatingInput">Tamaño construido</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="total_size" />
-        <label for="floatingInput">Tamaño total</label>
-      </div>
-    </div>
-    <div class="manage-project__form-quant">
-      <div class="form-floating">
-        <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="rooms" />
-        <label for="floatingInput">Cant. Habitaciones</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="bathrooms" />
-        <label for="floatingInput">Cant. Baños</label>
-      </div>
-      <div class="form-floating">
-        <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="garage" />
-        <label for="floatingInput">Cant. Cochera</label>
       </div>
     </div>
     <div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="url_video" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="url_video"
+        />
         <label for="floatingInput">Url youtube</label>
       </div>
       <div class="manage-project__steps">
@@ -208,8 +211,13 @@
     </div>
     <div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-          formControlName="url_map" />
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="url_map"
+        />
         <label for="floatingInput">Url mapa</label>
       </div>
       <div class="pt-2">
@@ -221,24 +229,37 @@
       <label for="formFile" class="form-label">
         Agregar imagenes (Max 1mb)
       </label>
-      <input class="form-control" type="file" id="formFile" accept="image/*" multiple
-        (change)="onFileImagesChange($event)" />
+      <input
+        class="form-control"
+        type="file"
+        id="formFile"
+        accept="image/*"
+        multiple
+        (change)="onFileImagesChange($event)"
+      />
       <div class="mt-3 manage-project__form__list-img">
         @for (item of listFiles; track item; let index = $index) {
         <figure class="manage-project__form__images">
           <img [src]="item" alt="" />
-          <button type="button" class="btn btn-danger" (click)="onRemoveImage(index)">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onRemoveImage(index)"
+          >
             <img src="./assets/icons/remove.svg" alt="remove" />
           </button>
         </figure>
-        }
-        @if (!listFiles.length) {
+        } @if (!listFiles.length) {
         <span>Aún no se agregan imágenes</span>
         }
       </div>
     </div>
-    <button type="button" class="btn btn-{{ isEdit ? 'warning' : 'success' }} mt-4"
-      [disabled]="(form.invalid && !isEdit) || loading" (click)="handleProject()">
+    <button
+      type="button"
+      class="btn btn-{{ isEdit ? 'warning' : 'success' }} mt-4"
+      [disabled]="(form.invalid && !isEdit) || loading"
+      (click)="handleProject()"
+    >
       {{ loading ? "Guardando..." : isEdit ? "Editar" : "Guardar" }}
     </button>
   </form>

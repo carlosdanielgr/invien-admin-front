@@ -63,6 +63,13 @@ export const routes: Routes = [
           ).then((c) => c.ProjectDetailComponent),
       },
       {
+        path: 'property-detail',
+        loadComponent: () =>
+          import(
+            './components/admin/pages/property-detail/property-detail.component'
+          ).then((c) => c.PropertyDetailComponent),
+      },
+      {
         path: 'advisor',
         loadComponent: () =>
           import('./components/admin/pages/advisors/advisors.component').then(
