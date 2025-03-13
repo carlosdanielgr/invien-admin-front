@@ -1,5 +1,5 @@
 <article class="projects">
-  <app-add-button routerLink="project-add" />
+  <app-add-button routerLink="../property-add" />
   <ul
     ngbNav
     #nav="ngbNav"
@@ -40,7 +40,7 @@
 @if(!projectsService.projects.length && !projectsService.loading) {
 <div class="projects__no-data">
   <p>Aún no se ha creado ningún proyecto</p>
-  <button type="button" class="btn btn-success" routerLink="project-add">
+  <button type="button" class="btn btn-success" routerLink="../property-add">
     Agregar proyecto
   </button>
 </div>

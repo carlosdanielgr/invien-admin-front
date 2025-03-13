@@ -29,13 +29,13 @@ export class PropertyCardComponent {
   ) {}
 
   viewProject() {
-    this.router.navigate(['admin', 'project-detail'], {
+    this.router.navigate(['admin', 'property-detail'], {
       state: this.project,
     });
   }
 
   editProject() {
-    this.router.navigate(['admin', 'project-edit'], {
+    this.router.navigate(['admin', 'property-edit'], {
       state: this.projectService.originalData.find(
         (p) => p.id === this.project.id
       ),

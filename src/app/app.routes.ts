@@ -42,6 +42,20 @@ export const routes: Routes = [
           ).then((c) => c.ManageProjectComponent),
       },
       {
+        path: 'property-add',
+        loadComponent: () =>
+          import(
+            './components/admin/pages/manage-properties/manage-properties.component'
+          ).then((c) => c.ManagePropertiesComponent),
+      },
+      {
+        path: 'property-edit',
+        loadComponent: () =>
+          import(
+            './components/admin/pages/manage-properties/manage-properties.component'
+          ).then((c) => c.ManagePropertiesComponent),
+      },
+      {
         path: 'project-detail',
         loadComponent: () =>
           import(
