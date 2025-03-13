@@ -1,0 +1,56 @@
+<article class="projects">
+  <app-add-button routerLink="project-add" />
+  <ul
+    ngbNav
+    #nav="ngbNav"
+    class="nav-tabs"
+    [(activeId)]="active"
+    (navChange)="onFilterProject($event)"
+  >
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Todos</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="
+            projectsList;
+            context: { projects: projectsService.projects }
+          "
+        ></ng-container>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" [disabled]="projectsService.loading">
+      <button ngbNavLink>Renta</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="projectsList; context: { projects: projects }"
+        ></ng-container>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3" [disabled]="projectsService.loading">
+      <button ngbNavLink>Venta</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="projectsList; context: { projects: projects }"
+        ></ng-container>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</article>
+@if(!projectsService.projects.length && !projectsService.loading) {
+<div class="projects__no-data">
+  <p>Aún no se ha creado ningún proyecto</p>
+  <button type="button" class="btn btn-success" routerLink="project-add">
+    Agregar proyecto
+  </button>
+</div>
+}@else if(projectsService.loading) {
+<app-loading />
+}
+<ng-template #projectsList let-projects="projects">
+  <section class="projects__list">
+    @for (project of projects; track $index) {
+    <app-property-card [project]="project" />
+    }
+  </section>
+</ng-template>

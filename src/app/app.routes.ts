@@ -21,6 +21,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'properties',
+        loadComponent: () =>
+          import(
+            './components/admin/pages/properties/properties.component'
+          ).then((c) => c.PropertiesComponent),
+      },
+      {
         path: 'project-add',
         loadComponent: () =>
           import(
