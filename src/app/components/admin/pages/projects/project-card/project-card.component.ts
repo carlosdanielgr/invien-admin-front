@@ -20,7 +20,7 @@ import { ProjectService } from '@shared/services/project.service';
 export class ProjectCardComponent {
   @Input() project: Partial<Project> = {};
 
-  rootImages = `${environment.apiUrl}uploads/images/`;
+  rootImages = `${environment.apiUrl}uploads/images-projects/`;
 
   constructor(
     private readonly router: Router,

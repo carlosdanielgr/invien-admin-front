@@ -8,8 +8,8 @@ import {
   successAlert,
 } from '@shared/functions/confirm-alert.function';
 import { errorFn } from '@shared/functions/errors.function';
-import { Project } from '@shared/interfaces/project.interface';
-import { ProjectService } from '@shared/services/project.service';
+import { Property } from '@shared/interfaces/property.interface';
+import { PropertyService } from '@shared/services/property.service';
 
 @Component({
   selector: 'app-property-card',
@@ -19,43 +19,45 @@ import { ProjectService } from '@shared/services/project.service';
   styleUrl: './property-card.component.scss',
 })
 export class PropertyCardComponent {
-  @Input() project: Partial<Project> = {};
+  @Input() property: Partial<Property> = {};
 
   rootImages = `${environment.apiUrl}uploads/images/`;
 
   constructor(
     private readonly router: Router,
-    private readonly projectService: ProjectService
+    private readonly propertyService: PropertyService
   ) {}
 
-  viewProject() {
+  viewProperty() {
     this.router.navigate(['admin', 'property-detail'], {
-      state: this.project,
+      state: this.property,
     });
   }
 
-  editProject() {
+  editProperty() {
     this.router.navigate(['admin', 'property-edit'], {
-      state: this.projectService.originalData.find(
-        (p) => p.id === this.project.id
+      state: this.propertyService.originalData.find(
+        (p) => p.id === this.property.id
       ),
     });
   }
 
-  deleteProject() {
+  deleteProperty() {
     const request = () => {
-      this.projectService.deleteProject(this.project.id as string).subscribe({
-        next: () => {
-          successAlert('Proyecto eliminado correctamente');
-          this.projectService.newSubscribeToProjects();
-        },
-        error: () => {
-          errorFn('Error al eliminar el proyecto');
-        },
-      });
+      this.propertyService
+        .deleteProperty(this.property.id as string)
+        .subscribe({
+          next: () => {
+            successAlert('Propiedad eliminado correctamente');
+            this.propertyService.newSubscribeToProperties();
+          },
+          error: () => {
+            errorFn('Error al eliminar la propiedad');
+          },
+        });
     };
     confirmAlertLoading(
-      `Propiedad: ${this.project.name}, será eliminada`,
+      `Propiedad: ${this.property.name}, será eliminada`,
       request
     );
   }

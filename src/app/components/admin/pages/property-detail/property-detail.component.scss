@@ -126,6 +126,7 @@
     padding: 1rem;
     width: 100%;
     max-width: 400px;
+    max-height: fit-content;
     margin: 0 auto;
     > img {
       width: 200px;
@@ -155,7 +156,7 @@
 .carousel-btn:active {
   border-radius: 50%;
   background-color: var(--primary);
-  padding: 0.1rem 0.3rem;
+  padding: 0.1rem 0.3rem 0.4rem;
   color: white;
   > i {
     font-size: 1.5rem;

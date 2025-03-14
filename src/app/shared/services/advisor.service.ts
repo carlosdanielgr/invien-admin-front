@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
-import { Advisor } from '@shared/interfaces/project.interface';
+import { Advisor } from '@shared/interfaces/property.interface';
 
 @Injectable({
   providedIn: 'root',

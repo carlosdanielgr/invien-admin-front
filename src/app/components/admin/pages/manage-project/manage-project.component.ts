@@ -88,7 +88,7 @@ export class ManageProjectComponent implements OnInit, OnDestroy {
     amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
     amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
     this.listFiles = images.map(
-      (i: string) => `${environment.apiUrl}uploads/images/${i}`
+      (i: string) => `${environment.apiUrl}uploads/images-projects/${i}`
     );
   }
 

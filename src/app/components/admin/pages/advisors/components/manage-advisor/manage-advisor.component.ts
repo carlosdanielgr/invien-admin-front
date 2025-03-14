@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { errorFn } from '@shared/functions/errors.function';
-import { Advisor } from '@shared/interfaces/project.interface';
+import { Advisor } from '@shared/interfaces/property.interface';
 import { AdvisorService } from '@shared/services/advisor.service';
 
 interface AdvisorForm extends Omit<Advisor, 'id'> {}

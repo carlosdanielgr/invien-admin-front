@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Advisor } from '@shared/interfaces/project.interface';
 import { AddButtonComponent } from '@shared/components/add-button/add-button.component';
 import { AdvisorService } from '@shared/services/advisor.service';
 import { LoadingComponent } from '@shared/components/loading/loading.component';
@@ -12,6 +11,7 @@ import {
   confirmAlertLoading,
   successAlert,
 } from '@shared/functions/confirm-alert.function';
+import { Advisor } from '@shared/interfaces/property.interface';
 
 @Component({
   selector: 'app-advisors',

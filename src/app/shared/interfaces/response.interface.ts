@@ -1,4 +1,4 @@
-import { OriginalData } from '@shared/interfaces/project.interface';
+import { OriginalData } from './property.interface';
 
 export interface Response<T> {
   data: T;

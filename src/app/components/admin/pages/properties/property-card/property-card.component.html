@@ -1,21 +1,21 @@
 <div class="card project-card">
   <span class="project-card__title">
-    {{ project.name }}
+    {{ property.name }}
   </span>
   <figure class="project-card__img">
     <img
-      [src]="rootImages + (project.images ? project.images[0] : '')"
+      [src]="rootImages + (property.images ? property.images[0] : '')"
       alt="project"
     />
   </figure>
   <div class="btn-group">
-    <button class="btn btn-success" (click)="viewProject()">
+    <button class="btn btn-success" (click)="viewProperty()">
       <img src="./assets/icons/eye.svg" alt="view" />
     </button>
-    <button class="btn btn-warning" (click)="editProject()">
+    <button class="btn btn-warning" (click)="editProperty()">
       <img src="./assets/icons/edit.svg" alt="edit" />
     </button>
-    <button class="btn btn-danger" (click)="deleteProject()">
+    <button class="btn btn-danger" (click)="deleteProperty()">
       <img src="./assets/icons/remove.svg" alt="remove" />
     </button>
   </div>

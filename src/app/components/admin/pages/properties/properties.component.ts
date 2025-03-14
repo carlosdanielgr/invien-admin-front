@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ProjectService } from '@shared/services/project.service';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
+
+import { NgbNavChangeEvent, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 import { AddButtonComponent } from '@shared/components/add-button/add-button.component';
-import { NgbNavChangeEvent, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgTemplateOutlet } from '@angular/common';
-import { Project } from '@shared/interfaces/project.interface';
+import { PropertyService } from '@shared/services/property.service';
+import { Property } from '@shared/interfaces/property.interface';
 import { PropertyCardComponent } from './property-card/property-card.component';
 
 @Component({
@@ -26,18 +26,20 @@ import { PropertyCardComponent } from './property-card/property-card.component';
 export class PropertiesComponent implements OnInit {
   active = 1;
 
-  projects: Project[] = [];
+  properties: Property[] = [];
 
-  constructor(readonly projectsService: ProjectService) {}
+  constructor(readonly propertyService: PropertyService) {}
 
   ngOnInit(): void {
-    this.projectsService.initAllProjects();
-    this.projects = this.projectsService.projects;
+    this.propertyService.initAllProperties();
+    this.properties = this.propertyService.properties;
   }
 
   onFilterProject(event: NgbNavChangeEvent): void {
-    this.projects = this.projectsService.projects.filter((project) =>
-      event.nextId === 2 ? project.is_for === 'rent' : project.is_for === 'sale'
+    this.properties = this.propertyService.properties.filter((property) =>
+      event.nextId === 2
+        ? property.is_for === 'rent'
+        : property.is_for === 'sale'
     );
   }
 }

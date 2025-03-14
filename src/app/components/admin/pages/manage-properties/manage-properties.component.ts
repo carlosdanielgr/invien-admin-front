@@ -16,11 +16,11 @@ import {
   Advisor,
   OriginalData,
   Type,
-} from '@shared/interfaces/project.interface';
-import { ProjectService } from '@shared/services/project.service';
+} from '@shared/interfaces/property.interface';
 import { errorFn } from '@shared/functions/errors.function';
 import { Locations } from '@shared/interfaces/location.interface';
 import { LocationService } from '@shared/services/location.service';
+import { PropertyService } from '@shared/services/property.service';
 
 @Component({
   selector: 'app-manage-properties',
@@ -67,7 +67,7 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly advisorService: AdvisorService,
-    private readonly projectService: ProjectService,
+    private readonly propertyService: PropertyService,
     private readonly locationService: LocationService,
     private readonly router: Router
   ) {}
@@ -144,7 +144,7 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
   }
 
   private getTypes(): void {
-    this.projectService.getTypes().subscribe({
+    this.propertyService.getTypes().subscribe({
       next: (res) => {
         this.types = res;
       },
@@ -221,10 +221,10 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
   private onSaveProject(): void {
     const body = this.handleFormData(this.form.value);
     this.loading = true;
-    this.projectService.postCreateProject(body).subscribe({
+    this.propertyService.postCreateProperty(body).subscribe({
       next: () => {
-        this.projectService.newSubscribeToProjects();
-        this.router.navigate(['admin']);
+        this.propertyService.newSubscribeToProperties();
+        this.router.navigate(['admin/properties']);
       },
       error: () => {
         this.loading = false;
@@ -268,12 +268,12 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
 
     const body = this.handleFormData(data);
     this.loading = true;
-    this.projectService
-      .patchUpdateProject(body, this.project.id as string)
+    this.propertyService
+      .patchUpdateProperty(body, this.project.id as string)
       .subscribe({
         next: () => {
-          this.projectService.newSubscribeToProjects();
-          this.router.navigate(['admin']);
+          this.propertyService.newSubscribeToProperties();
+          this.router.navigate(['admin/properties']);
         },
         error: () => {
           this.loading = false;

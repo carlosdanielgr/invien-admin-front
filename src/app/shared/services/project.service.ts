@@ -4,17 +4,13 @@ import { shareReplay } from 'rxjs';
 
 import { environment } from '@environment/environment';
 import { Response } from '@shared/interfaces/response.interface';
-import {
-  OriginalData,
-  Project,
-  Type,
-} from '@shared/interfaces/project.interface';
+import { OriginalData, Project } from '@shared/interfaces/project.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  private readonly API_URL = `${environment.apiUrl}property/`;
+  private readonly API_URL = `${environment.apiUrl}project/`;
 
   projects: Project[] = [];
 
@@ -38,10 +34,6 @@ export class ProjectService {
 
   patchUpdateProject(project: FormData, id: string) {
     return this.http.patch(`${this.API_URL}update/${id}`, project);
-  }
-
-  getTypes() {
-    return this.http.get<Type[]>(`${this.API_URL}types`);
   }
 
   deleteProject(id: string) {

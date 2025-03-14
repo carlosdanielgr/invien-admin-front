@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { environment } from '@environment/environment';
-import { Project } from '@shared/interfaces/project.interface';
+import { Property } from '@shared/interfaces/property.interface';
 
 @Component({
   selector: 'app-property-detail',
@@ -13,7 +13,7 @@ import { Project } from '@shared/interfaces/project.interface';
   styleUrl: './property-detail.component.scss',
 })
 export class PropertyDetailComponent implements OnInit {
-  project!: Project;
+  project!: Property;
 
   apiUrl = `${environment.apiUrl}uploads/`;
 

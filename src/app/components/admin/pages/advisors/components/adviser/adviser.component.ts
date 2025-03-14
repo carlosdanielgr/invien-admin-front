@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { environment } from '@environment/environment';
-import { Advisor } from '@shared/interfaces/project.interface';
+import { Advisor } from '@shared/interfaces/property.interface';
 
 @Component({
   selector: 'app-adviser',
