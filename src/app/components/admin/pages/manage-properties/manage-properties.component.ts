@@ -21,6 +21,13 @@ import { errorFn } from '@shared/functions/errors.function';
 import { Locations } from '@shared/interfaces/location.interface';
 import { LocationService } from '@shared/services/location.service';
 import { PropertyService } from '@shared/services/property.service';
+import {
+  amenities_env,
+  amenities_exterior,
+  amenities_features,
+  amenities_services,
+  Amenity,
+} from '@shared/constants/amenities';
 
 @Component({
   selector: 'app-manage-properties',
@@ -59,6 +66,13 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
+  amenities = {
+    services: [...amenities_services],
+    features: [...amenities_features],
+    exterior: [...amenities_exterior],
+    envs: [...amenities_env],
+  };
 
   loading = false;
 
@@ -99,8 +113,30 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
     });
     this.getStatesByCountry();
     this.getTownsByState();
+    const services = this.amenities.services.map((s) => s.es);
+    const features = this.amenities.features.map((f) => f.es);
+    const exterior = this.amenities.exterior.map((e) => e.es);
+    const envs = this.amenities.envs.map((e) => e.es);
     amenities_en.forEach((v) => this.amenitiesEn.push(new FormControl(v)));
-    amenities_es.forEach((v) => this.amenitiesEs.push(new FormControl(v)));
+    amenities_es.forEach((v) => {
+      if (services.includes(v)) {
+        const index = services.findIndex((s) => s === v);
+        this.amenities.services[index].checked = true;
+      }
+      if (features.includes(v)) {
+        const index = features.findIndex((f) => f === v);
+        this.amenities.features[index].checked = true;
+      }
+      if (exterior.includes(v)) {
+        const index = exterior.findIndex((e) => e === v);
+        this.amenities.exterior[index].checked = true;
+      }
+      if (envs.includes(v)) {
+        const index = envs.findIndex((e) => e === v);
+        this.amenities.envs[index].checked = true;
+      }
+      this.amenitiesEs.push(new FormControl(v));
+    });
     this.listFiles = images.map(
       (i: string) => `${environment.apiUrl}uploads/images/${i}`
     );
@@ -182,15 +218,17 @@ export class ManagePropertiesComponent implements OnInit, OnDestroy {
     });
   }
 
-  addAmenity(i18n: string, input: HTMLInputElement): void {
-    if (i18n === 'es') this.amenitiesEs.push(new FormControl(input.value));
-    else this.amenitiesEn.push(new FormControl(input.value));
-    input.value = '';
-  }
-
-  removeAmenity(i18n: string, index: number): void {
-    if (i18n === 'es') this.amenitiesEs.removeAt(index);
-    else this.amenitiesEn.removeAt(index);
+  handleAmenity(checked: boolean, amenity: Amenity) {
+    if (checked) {
+      this.amenitiesEs.push(new FormControl(amenity.es));
+      this.amenitiesEn.push(new FormControl(amenity.en));
+      return;
+    }
+    const index = this.amenitiesEs.value.findIndex(
+      (v: string) => v === amenity.es
+    );
+    this.amenitiesEs.removeAt(index);
+    this.amenitiesEn.removeAt(index);
   }
 
   onFileImagesChange(event: any): void {

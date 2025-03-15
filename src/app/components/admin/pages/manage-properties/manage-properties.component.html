@@ -151,74 +151,6 @@
         <ngx-editor [editor]="editor[1]" formControlName="details_en">
         </ngx-editor>
       </div>
-      <div>
-        <div class="input-group mb-3">
-          <input
-            #amenityEs
-            type="text"
-            class="form-control"
-            placeholder="Amenidad en español"
-          />
-          <button
-            class="btn btn-success"
-            type="button"
-            (click)="addAmenity('es', amenityEs)"
-          >
-            <img src="./assets/icons/add.svg" alt="add" />
-          </button>
-        </div>
-        <ul class="list-group">
-          @for ( item of amenitiesEs.controls; track item.value; let index =
-          $index ) {
-          <li class="list-group-item">
-            <div class="manage-project__form-amenity">
-              <span>{{ item.value }}</span>
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="removeAmenity('es', index)"
-              >
-                <img src="./assets/icons/remove.svg" alt="remove" />
-              </button>
-            </div>
-          </li>
-          }
-        </ul>
-      </div>
-      <div>
-        <div class="input-group mb-3">
-          <input
-            #amenityEn
-            type="text"
-            class="form-control"
-            placeholder="Amenidad en inglés"
-          />
-          <button
-            class="btn btn-success"
-            type="button"
-            (click)="addAmenity('en', amenityEn)"
-          >
-            <img src="./assets/icons/add.svg" alt="add" />
-          </button>
-        </div>
-        <ul class="list-group">
-          @for ( item of amenitiesEn.controls; track item.value; let index =
-          $index ) {
-          <li class="list-group-item">
-            <div class="manage-project__form-amenity">
-              <span>{{ item.value }}</span>
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="removeAmenity('en', index)"
-              >
-                <img src="./assets/icons/remove.svg" alt="remove" />
-              </button>
-            </div>
-          </li>
-          }
-        </ul>
-      </div>
     </div>
     <div class="manage-project__form-quant mt-3">
       <div class="d-flex">
@@ -354,6 +286,84 @@
         </figure>
         } @if (!listFiles.length) {
         <span>Aún no se agregan imágenes</span>
+        }
+      </div>
+    </div>
+    <div class="manage-project__amenities">
+      <span>Servicios</span>
+      <hr />
+      <div class="manage-project__amenities-list form-check">
+        @for (item of amenities.services; track item; let index = $index) {
+        <div class="manage-project__amenities-item">
+          <input
+            #amenity
+            type="checkbox"
+            class="form-check-input"
+            id="services-{{ index }}"
+            [checked]="item.checked"
+            (change)="handleAmenity(amenity.checked, item)"
+          />
+          <label for="services-{{ index }}" class="form-check-label">{{
+            item.es
+          }}</label>
+        </div>
+        }
+      </div>
+      <span>Características generales</span>
+      <hr />
+      <div class="manage-project__amenities-list form-check">
+        @for (item of amenities.features; track item; let index = $index) {
+        <div class="manage-project__amenities-item">
+          <input
+            #amenity
+            type="checkbox"
+            class="form-check-input"
+            id="features-{{ index }}"
+            [checked]="item.checked"
+            (change)="handleAmenity(amenity.checked, item)"
+          />
+          <label for="features-{{ index }}" class="form-check-label">{{
+            item.es
+          }}</label>
+        </div>
+        }
+      </div>
+      <span>Exterior</span>
+      <hr />
+      <div class="manage-project__amenities-list form-check">
+        @for (item of amenities.exterior; track item; let index = $index) {
+        <div class="manage-project__amenities-item">
+          <input
+            #amenity
+            type="checkbox"
+            class="form-check-input"
+            id="exterior-{{ index }}"
+            [checked]="item.checked"
+            (change)="handleAmenity(amenity.checked, item)"
+          />
+          <label for="exterior-{{ index }}" class="form-check-label">{{
+            item.es
+          }}</label>
+        </div>
+        }
+      </div>
+      <span>Ambientes</span>
+      <hr />
+      <div class="manage-project__amenities-list form-check">
+        @for (item of amenities.envs; track item; let index = $index) {
+        <div class="manage-project__amenities-item">
+          <input
+            #amenity
+            type="checkbox"
+            class="form-check-input"
+            id="envs-{{ index }}"
+            [checked]="item.checked"
+            (change)="handleAmenity(amenity.checked, item)"
+          />
+          <label for="envs-{{ index }}" class="form-check-label">{{
+            item.es
+          }}</label>
+        </div>
         }
       </div>
     </div>
