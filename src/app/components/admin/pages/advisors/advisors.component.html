@@ -1,0 +1,15 @@
+<section class="advisors">
+    <app-add-button (click)="openModal()" />
+    <article class="advisors__list">
+        @for (adviser of advisors; track $index) {
+        <app-adviser [adviser]="adviser" (editAdviser)="openModal($event)" (deleteAdviser)="deleteAdvisor($event)" />
+        }
+    </article>
+    @if(!advisors.length && !loading) {
+    <div class="alert alert-warning text-center" role="alert">
+        <span>Aún no se ha creado ningún asesor</span>
+    </div>
+    }@else if(loading) {
+    <app-loading />
+    }
+</section>

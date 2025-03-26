@@ -11,10 +11,12 @@
   z-index: 1000;
   &__logo {
     max-width: 4.2rem;
+    min-width: 60px;
   }
   &__links {
     display: flex;
     gap: 1.5rem;
+    overflow-x: auto;
     &__link {
       color: #000;
       text-decoration: none;
@@ -23,5 +25,8 @@
         color: var(--bs-primary);
       }
     }
+  }
+  > button {
+    min-width: 40px;
   }
 }

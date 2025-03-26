@@ -5,25 +5,15 @@ export interface Project {
   name: string;
   description: string;
   images: string[];
-  price: string;
-  currency: string;
-  total_size: string;
-  built_size: string;
-  rooms: number;
-  bathrooms: number;
-  garage: number;
-  details: string;
+  price_usd: string;
+  price_mxn: string;
   amenities: string[];
   url_video: string;
   url_map: string;
   location: string;
-  pdf: string;
-  advisor?: Advisor;
-  advisorId: number;
   country: Country;
   state: State;
   town: Town;
-  type: Type;
 }
 
 export interface OriginalData {
@@ -33,39 +23,15 @@ export interface OriginalData {
   description_es: string;
   description_en: string;
   images: string[];
-  price: string;
-  currency: string;
-  total_size: string;
-  built_size: string;
-  rooms: number;
-  bathrooms: number;
-  garage: number;
-  details_es: string;
-  details_en: string;
+  price_usd: string;
+  price_mxn: string;
   amenities_es: string[];
   amenities_en: string[];
   url_video: string;
   url_map: string;
   location_es: string;
   location_en: string;
-  pdf: string;
-  advisorId: number;
   country: Country;
   state: State;
   town: Town;
-  type: Type;
-}
-
-export interface Advisor {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  image: string;
-}
-
-export interface Type {
-  id: string;
-  type_es: string;
-  type_en: string;
 }

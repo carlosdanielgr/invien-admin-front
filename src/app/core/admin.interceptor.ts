@@ -4,15 +4,18 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 import { errorFn } from '@shared/functions/errors.function';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export const adminInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
+  const modal = inject(NgbModal);
   const token = localStorage.getItem('token');
 
   const handleError = (err: any) => {
     if (err.status === 401) {
       localStorage.removeItem('token');
       router.navigate(['']);
+      modal.dismissAll();
       errorFn('La sesión ha expirado');
     }
     return throwError(() => err);

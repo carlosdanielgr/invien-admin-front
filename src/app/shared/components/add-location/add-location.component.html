@@ -1,0 +1,32 @@
+<section class="add-location">
+    <h2 class="mb-3 text-center">{{type.isEdit ? 'Editar' : 'Crear'}} {{typeNames[type.name] | lowercase}}</h2>
+    <form class="add-location__form" [formGroup]="form">
+        @if(type.name === 'country'){
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="name_es" />
+            <label for="floatingInput">Nombre en español</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="name_en" />
+            <label for="floatingInput">Nombre en ingles</label>
+        </div>
+        }
+        @else{
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                formControlName="name" />
+            <label for="floatingInput">Nombre del {{typeNames[type.name] | lowercase}}</label>
+        </div>
+        <app-autocomplete label="Seleccionar el país" [value]="values.country.name_es" />
+        }
+        @if(type.name === 'municipality'){
+        <app-autocomplete label="Seleccionar el departamento" [value]="values.state.name" />
+        }
+        <button type="button" class="btn btn-{{type.isEdit ? 'warning' : 'success'}}" [disabled]="form.invalid"
+            (click)="onSubmit()">
+            {{type.isEdit ? 'Editar' : 'Crear'}}
+        </button>
+    </form>
+</section>

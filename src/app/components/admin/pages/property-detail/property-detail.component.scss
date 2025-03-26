@@ -1,0 +1,168 @@
+@use "../../../../../styles/mixins" as *;
+
+%max-width {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.property-detail {
+  padding: 1rem;
+  .carousel {
+    @extend %max-width;
+  }
+  .carousel-item {
+    max-height: 650px;
+  }
+  &__carousel-img {
+    max-height: 650px;
+    object-fit: cover;
+  }
+  &__carousel-btn {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+  }
+  &__props {
+    display: grid;
+    gap: 1rem;
+    @extend %max-width;
+    @include screen(small) {
+      grid-template-columns: 1fr 1fr;
+      &-features {
+        justify-self: end;
+      }
+    }
+    &-title {
+      font-size: 2.6rem;
+      font-weight: 400;
+    }
+    &-type {
+      font-size: 1.2rem;
+      color: #434343;
+    }
+    &-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      > div {
+        display: flex;
+        flex-direction: column;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      span {
+        color: #747474;
+      }
+    }
+    &-price {
+      display: flex;
+      flex-direction: column;
+      > span {
+        &:first-child {
+          color: #7d7d7d;
+        }
+        &:last-child {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+  &__description {
+    background-color: #f5f5f5;
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      @extend %max-width;
+      @include screen(small) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      > app-form {
+        flex: 1;
+        max-width: 460px;
+      }
+    }
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 540px;
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      > button {
+        max-width: fit-content;
+      }
+    }
+    &-title {
+      font-size: 1.7rem;
+      font-weight: 400;
+    }
+    &-texts {
+      color: #626262;
+    }
+    &-amenity {
+      display: flex;
+      gap: 0.5rem;
+      color: #626262;
+      > img {
+        width: 1rem;
+      }
+    }
+  }
+  &__advisor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    color: #626262;
+    padding: 1rem;
+    width: 100%;
+    max-width: 400px;
+    max-height: fit-content;
+    margin: 0 auto;
+    > img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+    > h2 {
+      font-size: 1.5rem;
+    }
+  }
+  &__video {
+    @extend %max-width;
+    > iframe {
+      width: 100%;
+    }
+  }
+}
+
+.section {
+  padding: 2rem 1rem;
+}
+
+.carousel-btn,
+.carousel-btn:hover,
+.carousel-btn:focus,
+.carousel-btn:active {
+  border-radius: 50%;
+  background-color: var(--primary);
+  padding: 0.1rem 0.3rem 0.4rem;
+  color: white;
+  > i {
+    font-size: 1.5rem;
+  }
+}
+
+.carousel-btn:hover {
+  background-color: rgb(200, 24, 30);
+}

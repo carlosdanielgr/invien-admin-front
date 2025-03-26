@@ -1,0 +1,19 @@
+.adviser {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  &__img {
+    height: 15rem;
+    object-fit: cover;
+  }
+  &__contact {
+    display: block;
+    color: #4f4f4f;
+    text-decoration: none;
+  }
+  &__actions {
+    width: 100%;
+    margin-top: 1rem;
+    img {
+      height: 1.5rem;
+    }
+  }
+}

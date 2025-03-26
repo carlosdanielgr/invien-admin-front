@@ -1,0 +1,8 @@
+.add-location {
+  padding: 1rem;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

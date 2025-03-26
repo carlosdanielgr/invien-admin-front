@@ -1,0 +1,16 @@
+<article class="projects">
+  @for (project of projectsService.projects; track $index) {
+  <app-project-card [project]="project" />
+  }
+</article>
+<app-add-button routerLink="project-add" />
+@if(!projectsService.projects.length && !projectsService.loading) {
+<div class="projects__no-data">
+  <p>Aún no se ha creado ningún proyecto</p>
+  <button type="button" class="btn btn-success" routerLink="project-add">
+    Agregar proyecto
+  </button>
+</div>
+}@else if(projectsService.loading) {
+<app-loading />
+}

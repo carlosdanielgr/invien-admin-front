@@ -1,0 +1,56 @@
+<article class="projects">
+  <app-add-button routerLink="../property-add" />
+  <ul
+    ngbNav
+    #nav="ngbNav"
+    class="nav-tabs"
+    [(activeId)]="active"
+    (navChange)="onFilterProject($event)"
+  >
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Todos</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="
+            propertyList;
+            context: { properties: propertyService.properties }
+          "
+        ></ng-container>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" [disabled]="propertyService.loading">
+      <button ngbNavLink>Renta</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="propertyList; context: { properties: properties }"
+        ></ng-container>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3" [disabled]="propertyService.loading">
+      <button ngbNavLink>Venta</button>
+      <ng-template ngbNavContent>
+        <ng-container
+          *ngTemplateOutlet="propertyList; context: { properties: properties }"
+        ></ng-container>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</article>
+@if(!propertyService.properties.length && !propertyService.loading) {
+<div class="projects__no-data">
+  <p>Aún no se ha creado ningún proyecto</p>
+  <button type="button" class="btn btn-success" routerLink="../property-add">
+    Agregar proyecto
+  </button>
+</div>
+}@else if(propertyService.loading) {
+<app-loading />
+}
+<ng-template #propertyList let-properties="properties">
+  <section class="projects__list">
+    @for (property of properties; track $index) {
+    <app-property-card [property]="property" />
+    }
+  </section>
+</ng-template>
