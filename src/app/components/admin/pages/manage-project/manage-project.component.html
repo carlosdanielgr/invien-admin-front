@@ -85,19 +85,7 @@
         </select>
         <label for="floatingSelect">Seleccionar el municipio</label>
       </div>
-      <div class="form-floating">
-        <select
-          class="form-select"
-          id="floatingSelect"
-          aria-label="Floating label select example"
-          formControlName="townId"
-        >
-          @for (item of locations.towns; track $index) {
-          <option [value]="item.id">{{ item.name }}</option>
-          }
-        </select>
-        <label for="floatingSelect">Seleccionar amenidad</label>
-      </div>
+      <div></div>
       <div>
         <label class="mb-2">Descripción en español</label>
         <ngx-editor-menu [editor]="editor[0]" [toolbar]="toolbar">
